@@ -1,2 +1,2 @@
-# fabric-script
-## 关于fabric的一些脚本
+# blockchain
+## 关于 blockchain 的一切
