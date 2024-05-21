@@ -26,9 +26,21 @@ $ npm init -y
 $ npm i truffle openzeppelin-solidity loom-js loom-truffle-provider bn.js axios
 $ mkdir oracle && cd oracle && npx truffle init && cd ..
 
+# ...
 $ curl -L https://foundry.paradigm.xyz | bash
 $ foundryup
 $ git clone https://github.com/ethereum-optimism/optimism-starter.git
 $ cd optimism-starter
 $ npm install
+
+# use TronBox for deploy && Shasta test network
+$ mkdir CryptoZombies-TRON
+$ cd CryptoZombies-TRON
+$ npm install -g tronbox
+$ npm install -g tronweb
+$ tronbox init
+$ tronbox compile
+$ node scripts/generate-private-key.js
+$ tronbox migrate --reset --network shasta
+$ tronbox migrate --network mainnet
 ```
