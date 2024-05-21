@@ -25,4 +25,10 @@ $ cd EthPriceOracle
 $ npm init -y
 $ npm i truffle openzeppelin-solidity loom-js loom-truffle-provider bn.js axios
 $ mkdir oracle && cd oracle && npx truffle init && cd ..
+
+$ curl -L https://foundry.paradigm.xyz | bash
+$ foundryup
+$ git clone https://github.com/ethereum-optimism/optimism-starter.git
+$ cd optimism-starter
+$ npm install
 ```
