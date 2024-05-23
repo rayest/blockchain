@@ -1,2 +1,3 @@
 ./eth/geth-data/**
 ./bin/**
+**/.env
