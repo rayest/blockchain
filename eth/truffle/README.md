@@ -54,10 +54,10 @@ $ npm install --save @truffle/hdwallet-provider
 # 1. 先开启本地的 ganache 网络
 $ truffle console
 # 2. 在 ganache 网络中通过 console 中创建钱包： const HDWalletProvider = require('@truffle/hdwallet-provider');
-# 3. 通过在线工具生成助记词 wet tank palace fox focus destroy key zebra flip unit banner hill
+# 3. 通过在线工具生成助记词: wet tank palace fox focus destroy key zebra flip unit banner hill
 # 4. const mnemonic = 'wet tank palace fox focus destroy key zebra flip unit banner hill';
 #    const wallet = new HDWalletProvider(mnemonic, "http://localhost:8545");
-#。  wallet
+#    wallet
 ```
 
 ![image-20240523084950115](/Users/lirui/Library/Application Support/typora-user-images/image-20240523084950115.png)
