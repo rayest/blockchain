@@ -1,2 +1,2 @@
 # blockchain
-## 关于 blockchain 的一切
+## About blockchain and its applications
