@@ -69,6 +69,14 @@ $ npm install --save dotenv
 # 配置 truffle-config.js 网络: repsten。如果不可用，需要替换为其他的，如 sepolia 或者 Goerli
 # 初始化 migration
 # 编写合约代码和对应的 migration
+
+# 部署到测试网络
 $ truffle migrate --network ropsten
+
+# 创建前端 react 项目
+$ npx create-react-app test-infura-frontend
+$ cd test-infura-frontend
+$ npm install web3
+
 ```
 
