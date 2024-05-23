@@ -77,6 +77,17 @@ $ truffle migrate --network ropsten
 $ npx create-react-app test-infura-frontend
 $ cd test-infura-frontend
 $ npm install web3
+```
 
+* hardhat
+
+```shell
+$ mkdir hardhat
+$ cd hardhat
+$ npm install hardhat
+$ npx hardhat init
+$ npx hardhat compile
+$ npx hardhat run scripts/deploy.ts
+$ npx hardhat test test/Lock.ts
 ```
 
