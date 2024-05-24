@@ -67,3 +67,32 @@ h1 {
     font-style: normal;
 
 }
+
+/* css link */
+
+.a-div {
+    margin: 1em;
+    width: 50%;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: blue;
+}
+
+a:visited {
+    color: lightblue;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: green;
+}
+
+a:focus {
+    color: chartreuse;
+}
