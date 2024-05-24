@@ -96,3 +96,35 @@ a:active {
 a:focus {
     color: chartreuse;
 }
+
+/* css list style */
+
+.list-style {
+    padding: 5% 10%;
+    font-size: 20px;
+}
+
+ol:nth-child() {
+    list-style-type: decimal-leading-zero;
+}
+
+ul {
+    list-style-type: square;
+    color: blue;
+    list-style-position: inside;
+    line-height: 2;
+    list-style-image: url('https://cdn.freecodecamp.org/testable-projects-fcc/images/relaxing-cat.jpg');
+}
+
+ul li:nth-child(even){
+    color: #000;
+}
+
+ul ::marker {
+    color: red;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: fantasy;
+    content: "🐱 only 5$ >> ";
+
+}
