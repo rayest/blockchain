@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 * {
     font-family: monospace;
 }
@@ -46,5 +48,22 @@ h1 {
     outline: 2px solid red;
     outline-offset: 0.25rem;
     margin: 3rem;
+
+}
+
+.tpg {
+    padding: 10%;
+    font-size: 22px;
+}
+
+.tpg-p {
+    text-decoration: underline;
+    text-align: left;
+    text-indent: 2em;
+
+    font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight: 100px;
+    font-style: normal;
 
 }
