@@ -1,0 +1,21 @@
+*{
+    font-family: monospace;
+}
+p{
+    font-size: 20px;
+    color: purple;
+}
+
+body{
+    background-color: #f0f0f0;
+    font-size: 22px;
+    border: 3px solid black;
+}
+
+.highlight{
+    color: red;
+}
+
+.grey{
+    color: grey;
+}
