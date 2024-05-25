@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 1.5rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    display: grid;
+    place-content: center;
+}
+
+div:first-child {
+    background-color: dodgerblue;
+    /* transform: translateX(50%); */
+}
+
+div:nth-child(2) {
+    background-color: yellow;
+}
+
+div:last-child {
+    background-color: lightgreen;
+}
+
+div:hover {
+    background-color: midnightblue;
+    animation: all 2s ease-in-out 0.5s;
+}
+
+.animate {
+    animation-name: slide;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 1s;
+    animation-iteration-count: 5;
+    animation-direction: alternate;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    33% {
+        transform: translateX(600px) rotate(180deg);
+    }
+
+    66% {
+        transform: translateX(-600px) rotate(-180deg);
+    }
+
+    100% {
+        transform: translateX(0);
+        background-color: rebeccapurple;
+
+    }
+
+}
