@@ -101,6 +101,11 @@ img {
   text-align: center;
 }
 
+.card figcaption::after {
+  content: "🌟";
+  display: block;
+}
+
 /* small */
 @media screen and (min-width: 576px) {
   main {
@@ -122,6 +127,10 @@ img {
 @media screen and (min-width: 768px) {
   nav {
     display: none;
+  }
+
+  .card {
+    width: min(100%, 325px);
   }
 
   .card figure {
