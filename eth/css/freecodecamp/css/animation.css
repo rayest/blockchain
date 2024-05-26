@@ -54,26 +54,26 @@ div:hover {
 }
 
 .animate {
-    animation-name: slide;
-    animation-duration: 5s;
-    animation-timing-function: ease-in-out;
-    animation-delay: 1s;
-    animation-iteration-count: 5;
-    animation-direction: alternate;
+    animation-name: slide; /* 动画名称 */
+    animation-duration: 5s; /* 动画持续时间 */
+    animation-timing-function: ease-in-out; /* 动画速度曲线。意思是：动画以低速开始和结束。 */
+    animation-delay: 1s; /* 动画延迟时间 */
+    animation-iteration-count: 5; /* 动画播放次数 */
+    animation-direction: alternate; /* 动画方向。意思是：动画在交替方向播放。 */
 }
 
 @keyframes slide {
     0% {
-        transform: translateX(0);
+        transform: translateX(0); /* transform 属性允许您旋转，缩放，倾斜或平移元素。 */
     }
 
     33% {
-        transform: translateX(600px) rotate(180deg);
+        transform: translateX(600px) rotate(180deg); /*意思是：元素向右移动600px，然后旋转180度。 */
     }
 
     66% {
-        transform: translateX(-600px) rotate(-180deg);
-    }
+        transform: translateX(-600px) rotate(-180deg); /*意思是：元素向左移动600px，然后旋转-180度。 */
+    } 
 
     100% {
         transform: translateX(0);

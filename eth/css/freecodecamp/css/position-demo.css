@@ -4,11 +4,11 @@
     box-sizing: border-box;
 }
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* 平滑滚动 */
 }
 
 section {
-    height: 100vh;
+    height: 100vh; /* 100% of the viewport height */
 }
 
 .blue{

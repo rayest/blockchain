@@ -37,18 +37,18 @@ body {
 .container {
     background-color: rgb(251, 210, 156);
     background-image: url('../img/map-2176x1451.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: no-repeat; /* 不重复。意思是：背景图像不重复。 */
+    background-size: cover; /* 覆盖。意思是：背景图像尽可能小，但覆盖整个元素。 */
 }
 
 .hero {
     border-bottom: 2px solid black;
     padding: 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    display: flex; /* 弹性布局。意思是：元素的子元素将水平排列。 */
+    justify-content: flex-start; /* 弹性布局。意思是：元素的子元素将在弹性容器的开头排列。 */
+    align-items: center; /* 弹性布局。意思是：元素的子元素将在弹性容器的中心排列。 */
     gap: 30px;
-    background-color: hsla(0, 0%, 100%, 0.35);
+    background-color: hsla(0, 0%, 100%, 0.35); /* hsla(色调, 饱和度, 亮度, 透明度) */
 }
 
 
@@ -67,5 +67,5 @@ body {
 .h1 {
     font-size: 500%;
     color: aliceblue;
-    text-shadow: 2px 2px 5px black;
+    text-shadow: 2px 2px 5px black; /* 水平阴影 垂直阴影 模糊半径 阴影颜色 */
 }

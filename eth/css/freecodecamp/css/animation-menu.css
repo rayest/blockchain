@@ -92,7 +92,7 @@ header {
 nav {
     display: none;
     transform-origin: top center;
-    animation: showMenu 0.5s ease-in-out forwards;
+    animation: showMenu 0.5s ease-in-out forwards; /* 意思是：动画以低速开始和结束。且动画结束后保持最后一个关键帧的状态。 */
 }
 
 @keyframes showMenu {
@@ -137,5 +137,5 @@ nav a:any-link {
 nav a:hover,
 nav a:focus {
     transform: scale(1.2);
-    transition: all 0.3s;
+    transition: all 0.3s; /* 意思是：所有属性的变化都会有0.3s的过渡时间。 */
 }

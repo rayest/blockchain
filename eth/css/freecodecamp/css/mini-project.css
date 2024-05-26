@@ -3,6 +3,7 @@
     text-align: center;
     padding: 0;
     box-sizing: border-box;
+    /* 盒模型。常见的值有：content-box（默认值）、border-box。 意思是：元素的宽度和高度包括内容、内边距和边框，但不包括外边距。 */
 }
 
 nav {

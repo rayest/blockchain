@@ -20,8 +20,8 @@ body {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    flex-flow: row nowrap;
-    align-content: space-evenly;
+    flex-flow: row nowrap; /* 表示元素的子元素将水平排列。并且不换行。 */
+    align-content: space-evenly; /* 表示元素的子元素将在弹性容器的每行之间平均分布。 */
 
 }
 
@@ -35,7 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 1;
+    flex-shrink: 1; /* 表示元素的子元素将在必要时缩小。 并且缩小速度是1。 */
     flex-basis: 395px;
 }
 
@@ -44,5 +44,5 @@ body {
 }
 
 .box:nth-child(2) {
-    flex-shrink: 2;
+    flex-shrink: 2; /* 表示元素的子元素将在必要时缩小。 并且缩小速度是2。 */
 }

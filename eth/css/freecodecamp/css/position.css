@@ -41,7 +41,7 @@ body {
 }
 
 .absolute {
-    position: absolute;
+    position: absolute; /* 绝对定位。意思是：元素的位置相对于最近的已定位父元素，如果没有已定位的父元素，那么它的位置相对于<html>。 */
     top: 0px;
     left: 0px;
     background-color: blue;
@@ -50,21 +50,21 @@ body {
 
 .relative {
     background-color: red;
-    position: relative;
+    position: relative; /* 相对定位。意思是：元素的位置相对于它在正常文档流中的位置。 */
     top: 300px;
     left: 100px;
 }
 
 .fixed {
     background-color: green;
-    position: fixed;
+    position: fixed; /* 固定定位。意思是：元素的位置相对于浏览器窗口是固定的。 */
     top: 100px;
     left: 200px;
 }
 
 .sticky {
     background-color: var(--primary-color);
-    position: sticky;
-    top: 0px;
+    position: sticky; /* 粘性定位。意思是：元素的位置在特定的滚动位置时变为固定的。 */
+    top: 0px; 
     left: 0px;
 }
