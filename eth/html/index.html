@@ -8,105 +8,131 @@
     <link rel="stylesheet" href="main" />
   </head>
   <body>
-    <h1>My Goals for the Year</h1>
-    <hr />
-    <nav>
-      <ul>
-        <li><a href="#html">Learn HTML</a></li>
-        <li><a href="#vacation">Plan a Vacation</a></li>
-      </ul>
-    </nav>
-    <hr />
-    <section id="html">
-      <h2>I'm Ready to learn HTML</h2>
-      <p>This is my first web page</p>
-      <img
-        src="img/html_logo_300x300.png"
-        alt="HTML5 Logo"
-        width="300" 
-        height="300"
-        title="I am learning HTML"
-      />
-      <figure>
-        <figcaption>An example of HTML5 code</figcaption>
-        <p>
-          <code>&lt;h1&gt; Hello World &lt;/h1&gt;</code>
-        </p>
-      </figure>
-
-      <h3>My Daily Schedule</h3>
-      <p>Let me tell you how:</p>
-      <ol>
-        <li>...I learn more about web dev.</li>
-        <li>...I plan out my schedule.</li>
-        <li>
-          ...I use resources from
-          <abbr title="This is explaination">
-            <a href="https://developer.mozilla.org/en-US/">MDN</a>
-          </abbr>
-        </li>
-      </ol>
-    </section>
+    <header>
+      <h1>My Goals for the Year</h1>
+      <nav aria-label="primary-navigation">
+        <ul>
+          <li><a href="#html">Learn HTML</a></li>
+          <li><a href="#vacation">Plan a Vacation</a></li>
+        </ul>
+      </nav>
+    </header>
 
     <hr />
 
-    <section id="vacation">
-      <h2>I am Also Planning a Vacation</h2>
-      <p>I've been working hard and <em>really need a getway</em>.</p>
-      <p>
-        I live in <abbr title="HangZhou">HZ</abbr> so I want to visit a beach
-      </p>
-
-      <h3>Places I'd Like to Visit</h3>
-      <ul>
-        <li><p>I've heard good things about the Caribean.</p></li>
-        <figure>
+    <main>
+      <article id="html">
+        <h2>I'm Ready to learn HTML</h2>
+        <p>This is my first web page</p>
+        <section>
+          <h3>HTML5</h3>
           <img
-            src="img/caribbean.jpg"
-            alt="Caribean Beach"
-            width="400"
-            height="225"
-            title="I want to visit Caribean beach."
-            loading="lazy"
+            src="img/html_logo_300x300.png"
+            alt="HTML5 Logo"
+            width="300"
+            height="300"
+            title="I am learning HTML"
           />
-          <figcaption>Caribean Beach Getway</figcaption>
-        </figure>
-        <li>
-          <p>I've heard good things about going here:</p>
-          <address>
-            Margarita Island, Venezuela<br />
-            bahia de cata, Venezuela<br />
-            Colonial Zone, Dominican Republic 77500<br />
-          </address>
           <figure>
-            <img
-              src="img/vacation.jpg"
-              alt="Cancun vacation"
-              title="It's 5 o'Clock somewhere."
-              loading="lazy"
-              width="400"
-              height="267"
-            />
-            <figcaption>A Caribean Vacation Image</figcaption>
+            <figcaption>An example of HTML5 code</figcaption>
+            <p>
+              <code>&lt;h1&gt; Hello World &lt;/h1&gt;</code>
+            </p>
           </figure>
-        </li>
-      </ul>
+        </section>
+        <section>
+          <h3>My Daily Schedule</h3>
+          <p>Let me tell you how:</p>
+          <ol>
+            <li>...I learn more about web dev.</li>
+            <li>...I plan out my schedule.</li>
+            <li>
+              ...I use resources from
+              <abbr title="This is explaination">
+                <a href="https://developer.mozilla.org/en-US/">MDN</a> </abbr
+              >.
+            </li>
+          </ol>
+          <aside>
+            <details>
+              <summary>
+                Guess the <mark> number of hours</mark> I code per day
+              </summary>
+              <p>
+                I start at <time datetime="08:00">8 am </time> and I write code
+                for <time datetime="PT3H">3 hours </time> every morning.
+              </p>
+            </details>
+          </aside>
+        </section>
+      </article>
 
-      <h3>Places I Want to Avoid</h3>
-      <dl>
-        <dt>North Pole</dt>
-        <dd>Too cold</dd>
+      <hr />
 
-        <dt>South Pole</dt>
-        <dd>Too cold</dd>
+      <article id="vacation">
+        <h2>I am Also Planning a Vacation</h2>
+        <p>I've been working hard and <em>really need a getway</em>.</p>
+        <p>
+          I live in <abbr title="HangZhou">HZ</abbr> so I want to visit a beach
+        </p>
 
-        <dt>Death Valley</dt>
-        <dd>Too hot</dd>
-      </dl>
-    </section>
+        <section>
+          <h3>Places I'd Like to Visit</h3>
+          <ul>
+            <li><p>I've heard good things about the Caribean.</p></li>
+            <figure>
+              <img
+                src="img/caribbean.jpg"
+                alt="Caribean Beach"
+                width="400"
+                height="225"
+                title="I want to visit Caribean beach."
+                loading="lazy"
+              />
+              <figcaption>Caribean Beach Getway</figcaption>
+            </figure>
+            <li>
+              <p>I've heard good things about going here:</p>
+              <address>
+                Margarita Island, Venezuela<br />
+                bahia de cata, Venezuela<br />
+                Colonial Zone, Dominican Republic 77500<br />
+              </address>
+              <figure>
+                <img
+                  src="img/vacation.jpg"
+                  alt="Cancun vacation"
+                  title="It's 5 o'Clock somewhere."
+                  loading="lazy"
+                  width="400"
+                  height="267"
+                />
+                <figcaption>A Caribean Vacation Image</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Places I Want to Avoid</h3>
+          <dl>
+            <dt>North Pole</dt>
+            <dd>Too cold</dd>
+
+            <dt>South Pole</dt>
+            <dd>Too cold</dd>
+
+            <dt>Death Valley</dt>
+            <dd>Too hot</dd>
+          </dl>
+        </section>
+      </article>
+    </main>
     <hr />
 
-    &lt;&lt;&lt;&copy;<a href="about.html">Rayest Lee</a>&gt;&gt;&gt;
-    <p><a href="#">Back to Top</a></p>
+    <footer>
+      <p>&lt;&lt;&lt;&copy;<a href="about.html">Rayest Lee</a>&gt;&gt;&gt;</p>
+      <p><a href="#">Back to Top</a></p>
+    </footer>
   </body>
 </html>
