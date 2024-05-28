@@ -5,3 +5,17 @@ $ npm install -g typescript
 $ tsc --init
 $ tsc -w
 ```
+
+###  vite-ts-project 
+```shell
+$ cd vite-ts-project
+$ npm install
+$ npm run dev
+```
+
+###  vite-react-ts-project 
+```shell
+$ cd vite-react-ts-project
+$ npm install
+$ npm run dev
+```
