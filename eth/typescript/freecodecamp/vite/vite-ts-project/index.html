@@ -1,12 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>My List</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="/js/main.js"></script>
   </head>
+
   <body>
+    <main>
+      <h1 class="offscreen">My List</h1>
+      <section class="newItemEntry">
+        <h2 class="offscreen">New Item Entry</h2>
+        <form class="newItemEntry__form" id="itemEntryForm">
+          <label for="newItem" class="offscreen">enter a new to do item</label>
+          <input
+            class="newItemEntry__input"
+            id="newItem"
+            type="text"
+            maxlength="100"
+            placeholder="Add item"
+          />
+          <button
+            id="addItem"
+            class="button newItemEntry__button"
+            title="Add new Item"
+          >
+            +
+          </button>
+        </form>
+      </section>
+
+      <section class="listContainer">
+        <header class="listTitle">
+          <h2 id="listName">List</h2>
+          <button
+            id="clearItemsButton"
+            class="button listTitle__button"
+            title=""
+            aria-label="Remove all items from the list"
+          >
+            Clear
+          </button>
+        </header>
+        <hr />
+
+        <ul id="listItems">
+          <!-- <li class="item">
+            <input type="checkbox" id="1" tabindex="0">
+            <label for="1">eat</label>
+          </li>
+          <li class="item">
+            <input type="checkbox" id="2" tabindex="0">
+            <label for="2">sleep</label>
+          </li>
+          <li class="item">
+            <input type="checkbox" id="3" tabindex="0">
+            <label for="3">code</label>
+          </li> -->
+        </ul>
+
+      </section>
+    </main>
+
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
