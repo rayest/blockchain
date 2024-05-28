@@ -19,3 +19,11 @@ $ cd vite-react-ts-project
 $ npm install
 $ npm run dev
 ```
+
+
+### React
+```shell
+$ npx create-react-app my-app
+$ cd my-app
+$ npm start
+```
