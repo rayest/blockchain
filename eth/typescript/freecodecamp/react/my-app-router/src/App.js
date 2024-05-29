@@ -11,6 +11,8 @@ import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import api from "./api/posts";
 import EditPost from "./EditPost";
+import useWindowSize from "./hooks/useWindowSize";
+import useAxiosFetch from "./hooks/useAxiosFetch";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -21,23 +23,31 @@ function App() {
   const [editTitle, setEditTitle] = useState("");
   const [editBody, setEditBody] = useState("");
   const navigate = useNavigate();
+  const { width } = useWindowSize();
+  const { data, fetchError, loading } = useAxiosFetch(
+    "http://localhost:3500/posts"
+  );
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await api.get("/posts");
-        setPosts(response.data);
-      } catch (error) {
-        if (error.response) {
-          console.log(error.response.status);
-        } else {
-          console.log(`Error: ${error.message}`);
-        }
-      }
-    };
+    setPosts(data);
+  }, [data]);
 
-    fetchPosts();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const response = await api.get("/posts");
+  //       setPosts(response.data);
+  //     } catch (error) {
+  //       if (error.response) {
+  //         console.log(error.response.status);
+  //       } else {
+  //         console.log(`Error: ${error.message}`);
+  //       }
+  //     }
+  //   };
+
+  //   fetchPosts();
+  // }, []);
 
   useEffect(() => {
     const filterResults = posts.filter(
@@ -91,13 +101,22 @@ function App() {
     }
   };
 
-
   return (
     <div className="App">
-      <Header title="React JS Blog" />
+      <Header title="React JS Blog" width={width} />
       <Nav search={search} setSearch={setSearch} />
       <Routes>
-        <Route exact path="/" element={<Home posts={searchResults} />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              posts={searchResults}
+              fetchError={fetchError}
+              loading={loading}
+            />
+          }
+        />
         <Route
           exact
           path="/post"
