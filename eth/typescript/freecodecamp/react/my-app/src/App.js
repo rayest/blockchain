@@ -3,37 +3,43 @@ import Content from "./Content";
 import Footer from "./Footer";
 import AddItem from "./AddItem";
 import SearchItem from "./SearchItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")));
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("items")) || []
+  );
 
   const [newItem, setNewItem] = useState("");
 
   const [search, setSearch] = useState("");
 
-  const setAndSaveItem = (newItems) => {
-    setItems(newItems);
-    localStorage.setItem("items", JSON.stringify(newItems));
-  };
+  // useEffect: 加载页面时执行，items变化时执行. 
+  // 1. 如果 items 不变化，只在加载页面时执行，可以传入空数组
+  // 2. 否则，每次 items 变化时都会执行 useEffect
+  useEffect(() => {
+    console.log("set items");
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const newItem = { id, checked: false, item };
     const listItems = [...items, newItem];
-    setAndSaveItem(listItems);
+    setItems(listItems);
   };
 
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
-    setAndSaveItem(listItems);
+    setItems(listItems);
   };
 
   const handleDelete = (id) => {
     const listItems = items.filter((item) => item.id !== id);
-    setAndSaveItem(listItems);
+    setItems(listItems);
   };
 
   const handleSubmit = (e) => {
