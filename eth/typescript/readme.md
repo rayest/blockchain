@@ -37,4 +37,10 @@ $ npm i react-router-dom -S
 
 # 时间
 $ npm i date-fns -S
+
+
+# axios axios
+$ npm i axios
+
+
 ```
