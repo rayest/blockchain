@@ -28,4 +28,7 @@ $ cd my-app
 $ npm start
 
 $ npm i react-icons --save-prod
+
+# json-server: 用于模拟后端数据，提供 RESTful API，支持 GET、POST、PUT、PATCH、DELETE 等请求
+$ npx json-server -p 3500 -w data/db.json
 ```

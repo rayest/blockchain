@@ -6,22 +6,43 @@ import SearchItem from "./SearchItem";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("items")) || []
-  );
+  const API_URL = "http://localhost:3500/items";
 
+  const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
-
   const [search, setSearch] = useState("");
+  const [fetchError, setFetchError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect: 加载页面时执行，items变化时执行. 
+  // useEffect: 加载页面时执行，items变化时执行.
   // 1. 如果 items 不变化，只在加载页面时执行，可以传入空数组
   // 2. 否则，每次 items 变化时都会执行 useEffect
+  // 3. 可以通过 RestAPI 获取数据，然后设置 items
   useEffect(() => {
     console.log("set items");
-    localStorage.setItem("items", JSON.stringify(items));
-  }, [items]);
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error("Fetch items data failed");
+        }
+        const listItems = await response.json();
+        setItems(listItems);
+        setFetchError(null);
+      } catch (error) {
+        console.log(error.message);
+        setFetchError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    // 2秒后执行
+    setTimeout(() => {
+      // 这个函数是异步的，所以需要立即执行
+      (async () => fetchItems())();
+    }, 2000);
+  }, []);
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
@@ -59,13 +80,22 @@ function App() {
         handleSubmit={handleSubmit}
       />
       <SearchItem search={search} setSearch={setSearch} />
-      <Content
-        items={items.filter((item) =>
-          item.item.toLowerCase().includes(search.toLowerCase())
-        )} //
-        handleCheck={handleCheck}
-        handleDelete={handleDelete}
-      />
+      <main>
+        {loading && <p>Loading...</p>}
+
+        {/* error: Fetch items data failed */}
+        {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+        
+        {!fetchError && !loading && (
+          <Content
+            items={items.filter((item) =>
+              item.item.toLowerCase().includes(search.toLowerCase())
+            )} //
+            handleCheck={handleCheck}
+            handleDelete={handleDelete}
+          />
+        )}
+      </main>
       <Footer length={items.length} />
     </div>
   );
