@@ -11,6 +11,8 @@ function App() {
   const [reqType, setReqType] = useState("users");
   const [items, setItems] = useState([]);
 
+  // hooks：useEffect：在组件渲染后执行一次，用于获取数据。
+  // 并且监听 reqType 的变化，当 reqType 发生变化时，重新获取数据。
   useEffect(() => {
     fetch(`${API_URL}${reqType}`)
       .then((res) => res.json())

@@ -1,5 +1,6 @@
 const SearchItem = ({ search, setSearch }) => {
   return (
+    // onSubmit={(e) => e.preventDefault() 防止表单提交
     <form className="searchForm" onSubmit={(e) => e.preventDefault()}>
       <label htmlFor="search">Search</label>
       <input

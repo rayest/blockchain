@@ -6,19 +6,23 @@ import SearchItem from "./SearchItem";
 import { useEffect, useState } from "react";
 import apiRequest from "./apiRequest";
 
+/**
+ * App组件：管理购物清单的应用主组件。
+ *
+ * 该组件维护一个购物清单的状态，并提供添加、删除、检查项目的功能。
+ * 使用React的useState和useEffect钩子来管理组件的状态和副作用。
+ */
 function App() {
   const API_URL = "http://localhost:3500/items";
 
+  // 使用useState钩子初始化状态：购物清单、新项目、搜索关键字、获取数据错误信息和加载状态。
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [search, setSearch] = useState("");
   const [fetchError, setFetchError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // useEffect: 加载页面时执行，items变化时执行.
-  // 1. 如果 items 不变化，只在加载页面时执行，可以传入空数组
-  // 2. 否则，每次 items 变化时都会执行 useEffect
-  // 3. 可以通过 RestAPI 获取数据，然后设置 items
+  // useEffect钩子：加载页面时和items变化时执行，用于获取和更新购物清单数据。
   useEffect(() => {
     console.log("set items");
     const fetchItems = async () => {
@@ -38,19 +42,20 @@ function App() {
       }
     };
 
-    // 2秒后执行
+    // 页面加载2秒后执行获取数据操作
     setTimeout(() => {
-      // 这个函数是异步的，所以需要立即执行
       (async () => fetchItems())();
     }, 2000);
   }, []);
 
+  // 添加新项目到购物清单，并通过API保存。
   const addItem = async (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const newItem = { id, checked: false, item };
     const listItems = [...items, newItem];
     setItems(listItems);
 
+    // 发送POST请求添加新项目
     const postOptions = {
       method: "POST",
       headers: {
@@ -65,12 +70,14 @@ function App() {
     }
   };
 
+  // 检查或取消检查购物清单中的项目，并通过API更新状态。
   const handleCheck = async (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(listItems);
 
+    // 发送PATCH请求更新项目状态
     const myItem = listItems.filter((item) => item.id === id);
     const updateOptions = {
       method: "PATCH",
@@ -87,10 +94,12 @@ function App() {
     }
   };
 
+  // 从购物清单中删除指定项目，并通过API进行删除操作。
   const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
 
+    // 发送DELETE请求删除项目
     const deleteOptions = {
       method: "DELETE",
     };
@@ -103,14 +112,16 @@ function App() {
     }
   };
 
+  // 处理添加项目表单的提交事件，防止默认提交行为并添加新项目。
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent form submission
-    if (!newItem.trim()) return; // Prevent empty items
+    e.preventDefault(); // 防止表单提交
+    if (!newItem.trim()) return; // 防止添加空项目
     console.log(newItem);
     addItem(newItem);
     setNewItem("");
   };
 
+  // 渲染组件UI，根据状态显示加载指示器、错误信息、搜索结果等。
   return (
     <div className="App">
       <Header title="Groceries List" />
@@ -123,14 +134,13 @@ function App() {
       <main>
         {loading && <p>Loading...</p>}
 
-        {/* error: Fetch items data failed */}
         {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
 
         {!fetchError && !loading && (
           <Content
             items={items.filter((item) =>
               item.item.toLowerCase().includes(search.toLowerCase())
-            )} //
+            )}
             handleCheck={handleCheck}
             handleDelete={handleDelete}
           />
