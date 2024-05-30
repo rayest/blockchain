@@ -13,9 +13,6 @@ export const DataProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [editTitle, setEditTitle] = useState("");
-  const [editBody, setEditBody] = useState("");
-  const navigate = useNavigate();
   const { data, fetchError, loading } = useAxiosFetch(
     "http://localhost:3500/posts"
   );
@@ -33,7 +30,6 @@ export const DataProvider = ({ children }) => {
 
     setSearchResults(filterResults.reverse());
   }, [search, posts]);
-
 
   return (
     <DataContext.Provider

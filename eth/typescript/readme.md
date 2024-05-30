@@ -42,5 +42,6 @@ $ npm i date-fns -S
 # axios axios
 $ npm i axios
 
-
+# easy-peasy
+$ npm install easy-peasy
 ```
