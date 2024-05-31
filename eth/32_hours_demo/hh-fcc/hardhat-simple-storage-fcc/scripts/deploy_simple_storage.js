@@ -12,32 +12,32 @@ async function main() {
     const ethers = hre.ethers
     const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
 
-    const TokenFactory = await ethers.getContractFactory("Token")
 
-    console.log("Deploying Token...")
+    const simpleStorageFactory = await ethers.getContractFactory(
+        "SimpleStorage"
+    )
 
-    const token = await TokenFactory.deploy()
-    const address = await token.getAddress()
+    console.log("Deploying SimpleStorage...")
 
-    await token.waitForDeployment()
+    const simpleStorage = await simpleStorageFactory.deploy()
+    const address = await simpleStorage.getAddress()
+
+    await simpleStorage.waitForDeployment()
 
     const deployed = await provider.getCode(address)
-    console.log("TokenFactory deployed:", !!deployed)
+    console.log("SimpleStorageFactory deployed:", !!deployed)
     console.log("Deployed at:", address)
 
     // ========================================================================================================= operation
-    const name = await token.name()
-    console.log("Token name:", name)
+    const favoriteNumber = await simpleStorage.retrive()
+    console.log("Favorite number:", favoriteNumber)
 
-    const symbol = await token.symbol()
-    console.log("Token symbol:", symbol)
+    await simpleStorage.store(13)
+    console.log("Stored 13")
 
-    const balance = await token.balanceOf(accounts[0].address)
-    console.log("Token balance:", balance)
-
-    const rayest = await token.hello("rayest");
-    console.log("Hello:", rayest)
-
+    const newFavoriteNumber = await simpleStorage.retrive()
+    console.log("New favorite number:", newFavoriteNumber)
+    
 
 
     // ========================================================================================================= verify

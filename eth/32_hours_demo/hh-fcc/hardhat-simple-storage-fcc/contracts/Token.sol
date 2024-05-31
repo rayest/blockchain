@@ -1,4 +1,5 @@
 // This is the main building block for smart contracts.
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.24;
 
 contract Token {
@@ -57,5 +58,9 @@ contract Token {
      */
     function balanceOf(address account) external view returns (uint256) {
         return balances[account];
+    }
+
+    function hello(string memory username) external view returns (string memory) {
+        return username;
     }
 }
