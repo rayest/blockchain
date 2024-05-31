@@ -1,0 +1,8 @@
+node_module/
+
+# 忽略所有的node_modules文件夹
+node_modules/
+
+# 忽略 abi 文件
+*.abi
+*.bin
