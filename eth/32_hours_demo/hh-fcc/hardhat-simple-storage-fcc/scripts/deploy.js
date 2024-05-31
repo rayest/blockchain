@@ -6,26 +6,27 @@ async function main() {
         console.log(account.address)
     }
 
-    // =========================================================================================================
+    // ========================================================================================================= deploy
 
     const ethers = hre.ethers
     const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
 
-    const SimpleStorageFactory = await ethers.getContractFactory(
-        "SimpleStorage"
-    )
+    const TokenFactory = await ethers.getContractFactory("Token")
 
-    console.log("Deploying SimpleStorage...")
+    console.log("Deploying Token...")
 
-    const simpleStorage = await SimpleStorageFactory.deploy()
-    const address = await simpleStorage.getAddress()
+    const token = await TokenFactory.deploy()
+    const address = await token.getAddress()
 
-    await simpleStorage.waitForDeployment()
+    await token.waitForDeployment()
 
     const deployed = await provider.getCode(address)
+    console.log("TokenFactory deployed:", !!deployed)
     console.log("Deployed at:", address)
 
-    console.log("SimpleStorage deployed:", !!deployed)
+    // ========================================================================================================= operation
+    const name = await token.name()
+    console.log("Token name:", name)
 
 
 }
