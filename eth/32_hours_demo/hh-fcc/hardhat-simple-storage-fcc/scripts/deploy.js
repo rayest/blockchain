@@ -41,12 +41,6 @@ async function main() {
 
 
     // ========================================================================================================= verify
-    async function verifyContract(contractAddress) {
-        await run("verify:verify", {
-            address: contractAddress,
-            constructorArguments: [],
-        })
-    }
 }
 
 main()
