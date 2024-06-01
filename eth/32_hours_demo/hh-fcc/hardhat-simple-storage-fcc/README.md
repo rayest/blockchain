@@ -16,4 +16,10 @@ $ yarn hardhat run scripts/deploy.js --network sepolia
 
 # ether scan plugin: etherscan
 $ yarn add --dev @nomiclabs/hardhat-etherscan
+
+# custom tasks
+$  yarn hardhat block-number --network sepolia
+
+# deploy to localhost
+$ yarn hardhat run scripts/deploy.js --network localhost
 ```
