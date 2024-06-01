@@ -29,3 +29,8 @@ node_modules
 ignition/deployments/chain-31337
 
 .env
+
+cache
+artifacts
+gas-report.txt
+coverage.json

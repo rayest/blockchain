@@ -7,7 +7,7 @@ $ yarn hardhat
 $ yarn hardhat compile
 
 $ yarn add --dev prettier-plugin-solidity
-$ yarn hardhat test
+
 
 $ yarn hardhat run scripts/deploy.js 
 
@@ -22,4 +22,14 @@ $  yarn hardhat block-number --network sepolia
 
 # deploy to localhost
 $ yarn hardhat run scripts/deploy.js --network localhost
+
+# test
+$ yarn hardhat test
+
+# gas reporter
+$ yarn add hardhat-gas-reporter --dev
+
+# test coverage
+$ yarn add --dev solidity-coverage
+$ yarn hardhat coverage
 ```
