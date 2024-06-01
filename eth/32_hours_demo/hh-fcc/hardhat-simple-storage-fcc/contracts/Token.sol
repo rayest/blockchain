@@ -2,10 +2,13 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.24;
 
+import "hardhat/console.sol";
+
 contract Token {
     // Some string type variables to identify the token.
     string public name = "My Hardhat Token";
     string public symbol = "MHT";
+    string public addtionParam = "rayest";
 
     // The fixed amount of tokens, stored in an unsigned integer type variable.
     uint256 public totalSupply = 1000000;
@@ -23,11 +26,12 @@ contract Token {
     /**
      * Contract initialization.
      */
-    constructor() {
+    constructor(string memory _addtionParam) {
         // The totalSupply is assigned to the transaction sender, which is the
         // account that is deploying the contract.
         balances[msg.sender] = totalSupply;
         owner = msg.sender;
+        addtionParam = _addtionParam;
     }
 
     /**
@@ -60,7 +64,10 @@ contract Token {
         return balances[account];
     }
 
-    function hello(string memory username) external view returns (string memory) {
+    function hello(
+        string memory username
+    ) external pure returns (string memory) {
+        console.log("This is from console, %s", username);
         return username;
     }
 }

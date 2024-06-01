@@ -12,7 +12,6 @@ async function main() {
     const ethers = hre.ethers
     const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
 
-
     const simpleStorageFactory = await ethers.getContractFactory(
         "SimpleStorage"
     )
@@ -37,8 +36,6 @@ async function main() {
 
     const newFavoriteNumber = await simpleStorage.retrive()
     console.log("New favorite number:", newFavoriteNumber)
-    
-
 
     // ========================================================================================================= verify
     async function verifyContract(contractAddress) {

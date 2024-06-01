@@ -5,6 +5,7 @@ require("@nomicfoundation/hardhat-verify")
 require("./tasks/block-number")
 require("hardhat-gas-reporter")
 require("solidity-coverage")
+require("hardhat-deploy")
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -61,5 +62,14 @@ module.exports = {
         currency: "USD",
         noColors: true,
         coinmarketcap: COINMARKETCAP_API_KEY,
+    },
+
+    namedAccounts: {
+        deployer: {
+            default: 0,
+        },
+        sepolia: {
+            default: 1,
+        },
     },
 }

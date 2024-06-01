@@ -1,7 +1,7 @@
 const { expect } = require("chai")
 
 describe("SimpleStorage", function () {
-    let simpleStorage, simpleStorageFactory
+    let simpleStorage
 
     beforeEach(async function () {
         const ethers = hre.ethers
@@ -13,6 +13,4 @@ describe("SimpleStorage", function () {
         await simpleStorage.store(42)
         expect(await simpleStorage.retrive()).to.equal(42)
     })
-
-    
 })

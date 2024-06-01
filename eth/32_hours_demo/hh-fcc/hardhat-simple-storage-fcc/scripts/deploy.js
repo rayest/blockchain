@@ -12,11 +12,11 @@ async function main() {
     const ethers = hre.ethers
     const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545")
 
-    const TokenFactory = await ethers.getContractFactory("Token")
+    const tokenFactory = await ethers.getContractFactory("Token")
 
     console.log("Deploying Token...")
 
-    const token = await TokenFactory.deploy()
+    const token = await tokenFactory.deploy()
     const address = await token.getAddress()
 
     await token.waitForDeployment()
@@ -35,10 +35,8 @@ async function main() {
     const balance = await token.balanceOf(accounts[0].address)
     console.log("Token balance:", balance)
 
-    const rayest = await token.hello("rayest");
+    const rayest = await token.hello("rayest")
     console.log("Hello:", rayest)
-
-
 
     // ========================================================================================================= verify
 }
