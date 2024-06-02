@@ -26,7 +26,10 @@
         "typechain": "^8.3.0"
     },
     "dependencies": {
-        "dotenv": "^16.4.5"
+        "@chainlink/contracts": "^1.1.1",
+        "dotenv": "^16.4.5",
+        "global": "^4.4.0",
+        "hardhat-shorthand": "^1.0.0"
     },
     "scripts": {
         "compile": "yarn hardhat compile",

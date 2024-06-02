@@ -39,4 +39,7 @@ $ yarn add --dev hardhat-deploy
 # http-server
 $ yarn add --dev http-server
 $ yarn http-server
+
+# hardhat-shorthand
+$ yarn add global hardhat-shorthand
 ```
