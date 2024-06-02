@@ -3,14 +3,63 @@ import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethe
 
 const connectButton = document.getElementById("connectButton")
 const disConnectButton = document.getElementById("disconnectButton")
-const sendButton = document.getElementById("sendButton")
+const helloButton = document.getElementById("helloButton")
 const balanceButton = document.getElementById("balanceButton")
-const receiveButton = document.getElementById("receiveButton")
+const nameButton = document.getElementById("nameButton")
+const symbolButton = document.getElementById("symbolButton")
+const transferButton = document.getElementById("transferButton")
+
 connectButton.onclick = connect
 disConnectButton.onclick = disConnect
-sendButton.onclick = send
+nameButton.onclick = name
 balanceButton.onclick = balance
-receiveButton.onclick = receive
+symbolButton.onclick = symbol
+helloButton.onclick = hello
+transferButton.onclick = transfer
+
+async function name() {
+    console.log("sending...")
+    let signer = null
+
+    let provider
+    if (window.ethereum == null) {
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    }
+
+    if (typeof window.ethereum !== "undefined") {
+        provider = new ethers.BrowserProvider(window.ethereum)
+        signer = await provider.getSigner()
+
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer)
+        console.log(contract)
+
+        // 调用合约的方法
+        let tx = await contract.name()
+        console.log(tx)
+    }
+}
+
+async function symbol() {
+    console.log("sending...")
+    let signer = null
+    let provider = null
+    if (window.ethereum == null) {
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    }
+    if (typeof window.ethereum !== "undefined") {
+        provider = new ethers.BrowserProvider(window.ethereum)
+
+        signer = await provider.getSigner()
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer)
+        console.log(contract)
+
+        // 调用合约的方法
+        let tx = await contract.symbol()
+        console.log(tx)
+    }
+}
 
 async function connect() {
     // 在这里将执行一些 metamask 的代码
@@ -45,7 +94,7 @@ async function connect() {
 async function disConnect() {}
 
 //
-async function send() {
+async function hello() {
     console.log("sending...")
     let signer = null
 
@@ -80,6 +129,65 @@ async function send() {
         console.log(tx)
     }
 }
-async function receive() {}
 
-async function balance() {}
+async function balance() {
+    console.log("sending...")
+    let signer = null
+    let provider = null
+    if (window.ethereum == null) {
+        // If MetaMask is not installed, we use the default provider,
+        // which is backed by a variety of third-party services (such
+        // as INFURA). They do not have private keys installed,
+        // so they only have read-only access
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    }
+    if (typeof window.ethereum !== "undefined") {
+        // provider: 用于与以太坊网络进行通信
+        // Connect to the MetaMask EIP-1193 object. This is a standard
+        // protocol that allows Ethers access to make all read-only
+        // requests through MetaMask.
+        provider = new ethers.BrowserProvider(window.ethereum)
+
+        // It also provides an opportunity to request access to write
+        // operations,which will be performed by the private key
+        // that MetaMask manages for the user.
+
+        signer = await provider.getSigner()
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer)
+        console.log(contract)
+
+        // 调用合约的方法
+        let tx = await contract.balanceOf(signer.getAddress())
+        console.log(tx)
+    }
+}
+
+async function transfer() {
+    console.log("sending...")
+    let signer = null
+    let provider = null
+    if (window.ethereum == null) {
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    }
+    if (typeof window.ethereum !== "undefined") {
+        provider = new ethers.BrowserProvider(window.ethereum)
+
+        signer = await provider.getSigner()
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer)
+        console.log(contract)
+
+        let rawTx = {
+            to: CONTRACT_ADDRESS,
+            value: ethers.parseEther("1.0"),
+            data: contract.interface.encodeFunctionData("transfer", [
+                "0x072607E7886504cf137e40fd9dF8c263154E961B",
+                1,
+            ]),
+        }
+
+        let tx = await signer.sendTransaction(rawTx)
+        console.log(tx)
+    }
+}
