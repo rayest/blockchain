@@ -35,4 +35,8 @@ $ yarn hardhat coverage
 
 # hardhat-deploy
 $ yarn add --dev hardhat-deploy
+
+# http-server
+$ yarn add --dev http-server
+$ yarn http-server
 ```
