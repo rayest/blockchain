@@ -16,7 +16,7 @@ async function main() {
 
     console.log("Deploying Token...")
 
-    const token = await tokenFactory.deploy()
+    const token = await tokenFactory.deploy("hello")
     const address = await token.getAddress()
 
     await token.waitForDeployment()
