@@ -23,6 +23,8 @@ contract Token {
     // what happens within your contract.
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
+    event ON_HELLO(string indexed username);
+
     /**
      * Contract initialization.
      */
@@ -64,10 +66,9 @@ contract Token {
         return balances[account];
     }
 
-    function hello(
-        string memory username
-    ) external pure returns (string memory) {
+    function hello(string memory username) external returns (string memory) {
         console.log("This is from console, %s", username);
+        emit ON_HELLO(username);
         return username;
     }
 }

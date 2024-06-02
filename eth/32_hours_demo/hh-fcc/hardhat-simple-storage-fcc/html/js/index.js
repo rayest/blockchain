@@ -165,6 +165,7 @@ async function balance() {
 
 async function transfer() {
     console.log("sending...")
+    const ethAmount = "0.01"
     let signer = null
     let provider = null
     if (window.ethereum == null) {
@@ -180,14 +181,24 @@ async function transfer() {
 
         let rawTx = {
             to: CONTRACT_ADDRESS,
-            value: ethers.parseEther("1.0"),
+            value: ethers.parseEther(ethAmount), // 这个字符串表示的是以 ether 为单位的数量，然后返回一个 BigNumber 对象，表示的是相同数量的 wei。
             data: contract.interface.encodeFunctionData("transfer", [
                 "0x072607E7886504cf137e40fd9dF8c263154E961B",
-                1,
+                1, // 1 token
             ]),
         }
 
+        // provider.estimateGas(rawTx).then((gasEstimate) => {
+        //     rawTx.gasLimit = gasEstimate
+        // })
+        
+
         let tx = await signer.sendTransaction(rawTx)
         console.log(tx)
+
+        // 监听事件
+        let receipt = await listenTransferEvent(tx, provider)
     }
 }
+
+function listenTransferEvent(tx, provider) {}

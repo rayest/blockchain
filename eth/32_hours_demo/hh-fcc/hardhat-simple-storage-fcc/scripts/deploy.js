@@ -24,21 +24,6 @@ async function main() {
     const deployed = await provider.getCode(address)
     console.log("TokenFactory deployed:", !!deployed)
     console.log("Deployed at:", address)
-
-    // ========================================================================================================= operation
-    const name = await token.name()
-    console.log("Token name:", name)
-
-    const symbol = await token.symbol()
-    console.log("Token symbol:", symbol)
-
-    const balance = await token.balanceOf(accounts[0].address)
-    console.log("Token balance:", balance)
-
-    const rayest = await token.hello("rayest")
-    console.log("Hello:", rayest)
-
-    // ========================================================================================================= verify
 }
 
 main()
