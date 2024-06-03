@@ -1,3 +1,4 @@
 ./eth/geth-data/**
 ./bin/**
 **/.env
+**/.vscode/
