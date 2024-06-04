@@ -35,4 +35,5 @@ artifacts
 gas-report.txt
 coverage.json
 
-# vscode
+# ignition
+ignition/deployments/

@@ -47,4 +47,11 @@ $ npm install easy-peasy
 
 # gh-pages
 $ npm install gh-pages --save-dev
+
+### GraphQL
+1. use apollo sand box to test the query
+
+### The Graph
+
+
 ```

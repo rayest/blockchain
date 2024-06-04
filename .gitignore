@@ -2,3 +2,11 @@
 ./bin/**
 **/.env
 **/.vscode/
+
+# vscode files
+.vscode/setting.json
+
+# all .DS_Store
+**/.DS_Store
+
+

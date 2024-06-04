@@ -42,4 +42,7 @@ $ yarn http-server
 
 # hardhat-shorthand
 $ yarn add hardhat-shorthand
+
+# use ignition deploy
+$ npx hardhat ignition deploy ./ignition/modules/Lock.js
 ```
