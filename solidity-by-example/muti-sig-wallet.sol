@@ -90,7 +90,7 @@ contract MutiSigWallet {
             })
         );
 
-        emit SubmitTransasction(msg.sender, txIndex, _to, _value, _data);
+        emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data);
     }
 
     function confirmTransaction(
@@ -103,7 +103,7 @@ contract MutiSigWallet {
         notConfirmed(_txIndex)
     {
         Transaction storage transaction = transactions[_txIndex];
-        transaction[_txIndex].numConfirmations += 1;
+        transaction.numConfirmations += 1;
         isConfirmed[_txIndex][msg.sender] = true;
 
         emit ConfirmTransaction(msg.sender, _txIndex);
@@ -132,7 +132,7 @@ contract MutiSigWallet {
         uint256 _txIndex
     ) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
         Transaction storage transaction = transactions[_txIndex];
-        require(isConfirmed[_txIndex], "tx not confirmed");
+        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
 
         transaction.numConfirmations -= 1;
 
