@@ -158,10 +158,10 @@ contract ERC1155 is IERC1155 {
             );
         }
     }
-
+    
     function supportsInterface(
         bytes4 interfaceId
-    ) external view returns (bool) {
+    ) external pure returns (bool) {
         return
             interfaceId == 0x01ffc9a7 || // ERC165 Interface ID for ERC165
             interfaceId == 0xd9b67a26 || // ERC165 Interface ID for ERC1155
@@ -260,7 +260,10 @@ contract MyMuiltiToken is ERC1155 {
         _burn(msg.sender, id, value);
     }
 
-    function batchBurn(uint256[] calldata ids, uint256[] calldata values ) external {
+    function batchBurn(
+        uint256[] calldata ids,
+        uint256[] calldata values
+    ) external {
         _batchBurn(msg.sender, ids, values);
     }
 }
