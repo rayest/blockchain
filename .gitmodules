@@ -1,0 +1,3 @@
+[submodule "eth/32_hours_demo/foundry-simple-storage-f23/lib/forge-std"]
+	path = eth/32_hours_demo/foundry-simple-storage-f23/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
