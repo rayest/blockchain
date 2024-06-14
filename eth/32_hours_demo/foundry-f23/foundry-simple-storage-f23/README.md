@@ -49,6 +49,8 @@ $ anvil
 
 ```shell
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/SimpleStorage.s.sol 
+$ forge script script/SimpleStorage.s.sol --rpc-url $RPC_URL_SEPOLIA --private-key=$PRIVATE_KEY --broadcast
 ```
 
 ### Cast
