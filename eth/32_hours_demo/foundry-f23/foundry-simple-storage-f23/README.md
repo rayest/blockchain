@@ -66,3 +66,13 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+### others
+    
+```shell
+$ forge inspect FundMe storageLayout // inspect storage layout of FundMe contract
+
+# makefile
+$ make deploy-sepolia
+
+```
