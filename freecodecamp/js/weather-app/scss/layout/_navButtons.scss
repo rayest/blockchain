@@ -1,0 +1,7 @@
+.navButtons{
+    flex-grow: 1;
+    @include flexCenter; // 这个属性是用来设置元素的布局方式的，这里设置为 flex，表示元素是一个伸缩容器。并且调用了 mixin 中的 flexCenter。
+    justify-content: space-evenly;
+    padding: 0.5rem 0.25rem;
+
+}

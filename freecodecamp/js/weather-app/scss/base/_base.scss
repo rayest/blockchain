@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    background-color: $background-color;
+    background-image: url("../img/clouds.jpg");
+    background-size: cover;
+    background-blend-mode: overlay;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: $font-color;
+    @include mq(768px) {
+        font-size: 22px;
+    }
+}
+
+body {
+   width: 100%;
+   min-height: 100vh;
+   @include flexCenter;
+   flex-direction: column;
+   padding: 0.5rem;
+
+}
+
+main{
+    width: 100%;
+    max-width: 700px;
+    max-height: 1050px;
+    display: flex; // 这个属性是用来设置元素的布局方式的，这里设置为 flex，表示元素是一个伸缩容器。
+    flex-direction: column; // 这个属性是用来设置元素的排列方向的，这里设置为 column，表示元素是垂直排列的。
+    flex-grow: 1; // 这个属性是用来设置元素的伸缩比例的，这里设置为 1，表示元素可以伸缩。
+    color: $font-color;
+    background-color: $mask-color;
+    border: 1px solid $bordercolor;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2.5px $shadowcolor;
+
+}
+
+img {
+    display: block;
+}
+
+hr {
+    width: 90%;
+    margin: auto; // 这个属性是用来设置元素的外边距的，这里设置为 auto，表示元素的外边距是自动计算的。? 
+    border: 1px solid $bordercolor;
+}
+
+.none {
+    display: none; // 这个属性是用来设置元素的显示方式的，这里设置为 none，表示元素是不可见的。
+}
+
+.block {
+    display: block;
+}
