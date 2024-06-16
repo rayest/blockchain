@@ -52,3 +52,5 @@ fundSubscription:
 	@forge script script/Interactions.s.sol:FundSubscription $(NETWORK_ARGS)
 
 
+deployDSC:
+	@forge script script/DeployDSC.s.sol:DeployDSC $(NETWORK_ARGS)

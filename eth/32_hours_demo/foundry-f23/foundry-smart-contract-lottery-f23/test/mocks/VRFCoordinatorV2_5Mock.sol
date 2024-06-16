@@ -27,6 +27,7 @@ contract VRFCoordinatorMock {
         require(gasleft() >= b, "not enough gas for consumer");
         // solhint-disable-next-line avoid-low-level-calls, no-unused-vars
         (bool success,) = consumerContract.call(resp);
+        
     }
 
     modifier onlyLINK() {
