@@ -7,3 +7,6 @@
 [submodule "eth/32_hours_demo/foundry-f23/foundry-lottery-f23/lib/forge-std"]
 	path = eth/32_hours_demo/foundry-f23/foundry-lottery-f23/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "eth/32_hours_demo/foundry-f23/foundry-lottery-f23/lib/chainlink-brownie-contracts"]
+	path = eth/32_hours_demo/foundry-f23/foundry-lottery-f23/lib/chainlink-brownie-contracts
+	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
