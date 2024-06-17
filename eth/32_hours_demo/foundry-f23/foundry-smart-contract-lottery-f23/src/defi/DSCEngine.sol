@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.20;
 
-import {OracleLib, AggregatorV3Interface} from "../../libraries/OracleLib.sol";
+import {OracleLib, AggregatorV3Interface} from "../libraries/OracleLib.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -39,9 +39,9 @@ contract DSCEngine is ReentrancyGuard {
     uint256 private constant ADDITIONAL_FEED_PRECISION = 1e10;
     uint256 private constant FEED_PRECISION = 1e8;
 
-    /// @dev Mapping of token address to price feed address // 令牌地址到价格源地址的映射，比如 WETH 到 WETH/USD 的价格源。这里的价格源是链上的价格源
+    // 令牌地址到价格源地址的映射，比如 WETH 到 WETH/USD 的价格源。这里的价格源是链上的价格源
     mapping(address collateralToken => address priceFeed) private s_priceFeeds;
-    /// @dev Amount of collateral deposited by user
+
     // 用户存入的抵押品数量，比如用户存入了 10 个 WETH，那么这个值就是 10
     mapping(address user => mapping(address collateralToken => uint256 amount)) private s_collateralDeposited;
     /// @dev Amount of DSC minted by user
@@ -80,8 +80,7 @@ contract DSCEngine is ReentrancyGuard {
         if (tokenAddresses.length != priceFeedAddresses.length) {
             revert DSCEngine__TokenAddressesAndPriceFeedAddressesAmountsDontMatch();
         }
-        // These feeds will be the USD pairs // 这些价格源将是美元对，比如 ETH/USD 或 MKR/USD
-        // For example ETH / USD or MKR / USD
+        // 这些价格源将是美元对，比如 ETH/USD 或 MKR/USD
         for (uint256 i = 0; i < tokenAddresses.length; i++) {
             s_priceFeeds[tokenAddresses[i]] = priceFeedAddresses[i];
             s_collateralTokens.push(tokenAddresses[i]);
@@ -131,6 +130,7 @@ contract DSCEngine is ReentrancyGuard {
      * @param amountCollateral: The amount of collateral you're redeeming
      * @notice This function will redeem your collateral.
      * @notice If you have DSC minted, you will not be able to redeem until you burn your DSC
+     * // 这个函数用于取回你的抵押品。如果你铸造了 DSC，你将无法取回抵押品，直到你销毁了 DSC。
      */
     function redeemCollateral(address tokenCollateralAddress, uint256 amountCollateral)
         external
@@ -176,18 +176,20 @@ contract DSCEngine is ReentrancyGuard {
         nonReentrant
     {
         uint256 startingUserHealthFactor = _healthFactor(user);
+
+        // 如果用户的健康因子高于最低健康因子，我们不能清算用户
         if (startingUserHealthFactor >= MIN_HEALTH_FACTOR) {
             revert DSCEngine__HealthFactorOk();
         }
-        // If covering 100 DSC, we need to $100 of collateral
+        // 如果要覆盖 100 DSC，我们需要 100 美元的抵押品
         uint256 tokenAmountFromDebtCovered = getTokenAmountFromUsd(collateral, debtToCover);
-        // And give them a 10% bonus
-        // So we are giving the liquidator $110 of WETH for 100 DSC
-        // We should implement a feature to liquidate in the event the protocol is insolvent
-        // And sweep extra amounts into a treasury
+        // 10% 的奖金
+        // 所以我们给清算者 110 美元的 WETH 以换取 100 美元的 DSC
+        // 我们应该实现一个功能，以便在协议资不抵债的情况下清算
+        // 并将额外的金额转入一个保险基金
         uint256 bonusCollateral = (tokenAmountFromDebtCovered * LIQUIDATION_BONUS) / LIQUIDATION_PRECISION;
-        // Burn DSC equal to debtToCover
-        // Figure out how much collateral to recover based on how much burnt
+        // 销毁等于 debtToCover 的 DSC
+        // 根据销毁的数量计算要回收的抵押品数量
         _redeemCollateral(collateral, tokenAmountFromDebtCovered + bonusCollateral, user, msg.sender);
         _burnDsc(debtToCover, user, msg.sender);
 
@@ -243,6 +245,7 @@ contract DSCEngine is ReentrancyGuard {
     ///////////////////
     // Private Functions
     ///////////////////
+    // 这个函数用于取回抵押品, 这个函数会调用 ERC20 的 transfer 函数，将抵押品转移到用户的钱包
     function _redeemCollateral(address tokenCollateralAddress, uint256 amountCollateral, address from, address to)
         private
     {
@@ -257,11 +260,15 @@ contract DSCEngine is ReentrancyGuard {
     function _burnDsc(uint256 amountDscToBurn, address onBehalfOf, address dscFrom) private {
         s_DSCMinted[onBehalfOf] -= amountDscToBurn;
 
+        // address(this) 是这个合约的地址
+        // 这个函数会调用 ERC20 的 transferFrom 函数，将 DSC 从用户的钱包转移到这个合约
         bool success = i_dsc.transferFrom(dscFrom, address(this), amountDscToBurn);
         // This conditional is hypothetically unreachable
         if (!success) {
             revert DSCEngine__TransferFailed();
         }
+
+        // 因为已经转移到这个合约了，所以通过合约可以销毁 DSC
         i_dsc.burn(amountDscToBurn);
     }
 
