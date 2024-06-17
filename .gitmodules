@@ -13,3 +13,9 @@
 [submodule "eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-contracts"]
 	path = eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-foundry-upgrades"]
+	path = eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-foundry-upgrades
+	url = https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades
+[submodule "eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-contracts-upgradeable"]
+	path = eth/32_hours_demo/foundry-f23/foundry-smart-contract-lottery-f23/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable

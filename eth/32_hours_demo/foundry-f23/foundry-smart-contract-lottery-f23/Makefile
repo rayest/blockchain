@@ -54,3 +54,9 @@ fundSubscription:
 
 deployDSC:
 	@forge script script/DeployDSC.s.sol:DeployDSC $(NETWORK_ARGS)
+
+deployBox:
+	@forge script script/DeployBox.s.sol:DeployBox $(NETWORK_ARGS)
+
+upgradeBox:
+	@forge script script/UpgradeBox.s.sol:UpgradeBox $(NETWORK_ARGS)
