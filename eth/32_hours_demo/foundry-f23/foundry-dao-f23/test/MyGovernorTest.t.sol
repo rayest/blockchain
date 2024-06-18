@@ -28,20 +28,20 @@ contract MyGovernorTest is Test {
     address public constant VOTER = address(1);
 
     function setUp() public {
-        token = new GovToken();
-        token.mint(VOTER, 100e18);
+        token = new GovToken(); // 初始化一个 GovToken 合约
+        token.mint(VOTER, 100e18); // 给 VOTER 地址发行 100 个代币
 
-        vm.prank(VOTER);
-        token.delegate(VOTER);
-        timelock = new TimeLock(MIN_DELAY, proposers, executors);
-        governor = new MyGovernor(token, timelock);
-        bytes32 proposerRole = timelock.PROPOSER_ROLE();
-        bytes32 executorRole = timelock.EXECUTOR_ROLE();
-        bytes32 adminRole = timelock.TIMELOCK_ADMIN_ROLE();
+        vm.prank(VOTER); // 设置当前调用者为 VOTER 地址
+        token.delegate(VOTER); // VOTER 地址委托给自己
+        timelock = new TimeLock(MIN_DELAY, proposers, executors); // 初始化一个 TimeLock 合约
+        governor = new MyGovernor(token, timelock); // 初始化一个 MyGovernor 合约
+        bytes32 proposerRole = timelock.PROPOSER_ROLE(); // 获取 TimeLock 合约的 PROPOSER_ROLE
+        bytes32 executorRole = timelock.EXECUTOR_ROLE(); // 获取 TimeLock 合约的 EXECUTOR_ROLE
+        bytes32 adminRole = timelock.TIMELOCK_ADMIN_ROLE(); // 获取 TimeLock 合约的 TIMELOCK_ADMIN_ROLE
 
-        timelock.grantRole(proposerRole, address(governor));
-        timelock.grantRole(executorRole, address(0));
-        timelock.revokeRole(adminRole, msg.sender);
+        timelock.grantRole(proposerRole, address(governor)); // 授予 MyGovernor 合约 PROPOSER_ROLE 权限
+        timelock.grantRole(executorRole, address(0)); // 授予 0 地址 EXECUTOR_ROLE 权限
+        timelock.revokeRole(adminRole, msg.sender); // 撤销 msg.sender 的 TIMELOCK_ADMIN_ROLE 权限
 
         box = new Box();
         box.transferOwnership(address(timelock));
@@ -53,7 +53,7 @@ contract MyGovernorTest is Test {
     }
 
     function testGovernanceUpdatesBox() public {
-        uint256 valueToStore = 777;
+        uint256 valueToStore = 777; 
         string memory description = "Store 1 in Box";
         bytes memory encodedFunctionCall = abi.encodeWithSignature("store(uint256)", valueToStore);
         addressesToCall.push(address(box));
@@ -76,6 +76,8 @@ contract MyGovernorTest is Test {
         // 0 = Against, 1 = For, 2 = Abstain for this example
         uint8 voteWay = 1;
         vm.prank(VOTER);
+
+        // VOTER 投票支持 proposalId 提案
         governor.castVoteWithReason(proposalId, voteWay, reason);
 
         vm.warp(block.timestamp + VOTING_PERIOD + 1);
