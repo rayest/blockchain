@@ -9,6 +9,8 @@ import {DevOpsTools} from "lib/foundry-devops/src/DevOpsTools.sol";
 import "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
 
+import {Upgrades} from "openzeppelin-foundry-upgrades/Upgrades.sol";
+
 contract UpgradeBox is Script {
     function run() external returns (address) {
         address mostRecentlyDeployedProxy = DevOpsTools.get_most_recent_deployment("ERC1967Proxy", block.chainid);
