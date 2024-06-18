@@ -8,8 +8,8 @@ html {
     font-size: 16px;
     background-color: $background-color;
     background-image: url("../img/clouds.jpg");
-    background-size: cover;
-    background-blend-mode: overlay;
+    background-size: cover; 
+    background-blend-mode: overlay; // 这个属性是用来设置元素的混合模式的，这里设置为 overlay，表示元素是叠加的。
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
