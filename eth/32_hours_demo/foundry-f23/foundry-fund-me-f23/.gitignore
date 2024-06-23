@@ -14,7 +14,9 @@ docs/
 # Dotenv file
 .env
 
+.keystore
+
 # zksync
+
 zkout/
-.TODO.md
 lib/
