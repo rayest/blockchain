@@ -1,4 +1,5 @@
-const alchemyKey = "wss://eth-sepolia.g.alchemy.com/v2/l-7vpaOuK_-GKtHE7w1J7PNbRbgwWKgF";
+// 获取 env 文件中的 alchemyKey
+const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
@@ -7,11 +8,13 @@ const contractAddress = "0x6ce6cd5Fd2fA7a00d8975801F4E8CC9610A0b995";
 
 export const helloWorldContract = new web3.eth.Contract(contractABI, contractAddress);
 
+// 加载当前的链上 message。message 为 public 变量，可以直接调用，
 export const loadCurrentMessage = async () => {
     const message = await helloWorldContract.methods.message().call();
     return message;
 };
 
+// 连接钱包
 export const connectWallet = async () => {
     if (window.ethereum) {
         try {

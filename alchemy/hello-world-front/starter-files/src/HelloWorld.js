@@ -17,22 +17,26 @@ const HelloWorld = () => {
   const [message, setMessage] = useState("No connection to the network."); //default message
   const [newMessage, setNewMessage] = useState("");
 
-  //called only once
+  // called only once when the component loads
   useEffect(() => {
+
+    // 加载当前的链上 message
     async function fetchData() {
       const message = await loadCurrentMessage();
       setMessage(message);
     }
-    fetchData();
-    addSmartContractListener();
+    fetchData(); // 调用上面的函数
+    addSmartContractListener(); // 添加监听器。当链上的 message 发生变化时，更新页面上的 message
 
+    // 连接钱包，获取当前钱包的地址和状态
     async function fetchWalletData() {
       const walletResponse = await getCurrentWalletConnected();
       setWallet(walletResponse.address);
       setStatus(walletResponse.status);
     }
-    fetchWalletData();
-    addWalletListener();
+    fetchWalletData(); // 调用上面的函数
+    addWalletListener(); // 添加监听器。当钱包发生变化时，更新页面上的钱包地址和状态
+
   }, []);
 
   function addSmartContractListener() {
@@ -59,7 +63,6 @@ const HelloWorld = () => {
         }
       });
     }
-
   }
 
   const connectWalletPressed = async () => {
@@ -67,7 +70,6 @@ const HelloWorld = () => {
     setStatus(walletResponse.status);
     setWallet(walletResponse.address);
     addWalletListener();
-
   };
 
   const onUpdatePressed = async () => {
@@ -99,7 +101,7 @@ const HelloWorld = () => {
         <input
           type="text"
           placeholder="Update the message in your smart contract."
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={(e) => setNewMessage(e.target.value)} // 
           value={newMessage}
         />
         <p id="status">{status}</p>
