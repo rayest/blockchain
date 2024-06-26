@@ -37,3 +37,6 @@
 [submodule "alchemy/ERC20_Royalty/lib/forge-std"]
 	path = alchemy/ERC20_Royalty/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "alchemy/ERC20_Royalty/lib/solmate"]
+	path = alchemy/ERC20_Royalty/lib/solmate
+	url = https://github.com/rari-capital/solmate
