@@ -49,6 +49,8 @@ $ anvil
 
 ```shell
 $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+
+ $ forge create --rpc-url "xxxx" --private-key xxxx src/RoyaltyToken.sol:RoyaltyToken --constructor-args "RoyaltyToken" "ROYT" 18 2 1000000000000000000000
 ```
 
 ### Cast
