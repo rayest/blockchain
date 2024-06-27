@@ -2,21 +2,21 @@ specVersion: 1.0.0
 indexerHints:
   prune: auto
 schema:
-  file: ./schema.graphql
+  file: ./schema.graphql # 这个文件是用于定义数据模型的
 dataSources:
   - kind: ethereum
     name: Uni
-    network: mainnet
+    network: mainnet # 这个表示数据源所在的网络
     source:
-      address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"
-      abi: Uni
-      startBlock: 20142449
+      address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984" # 这个表示数据源所在的合约地址
+      abi: Uni # 这个表示数据源所在的合约的 ABI 文件
+      startBlock: 20142449 # 这个表示数据源的起始区块
     mapping:
-      kind: ethereum/events
+      kind: ethereum/events 
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
+        - Approval 
         - DelegateChanged
         - DelegateVotesChanged
         - MinterChanged
