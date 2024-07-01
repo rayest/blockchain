@@ -1,5 +1,3 @@
-import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.js";
-import { config } from "./config.js";
 import { testProvider } from "./provider.js";
 import { testContract } from "./contract.js";
 import { wallet } from "./wallet.js";
@@ -7,9 +5,12 @@ import { contractInteract } from "./contract-interact.js";
 // import { testDeploy } from "./deploy.js";
 import { testEvent } from "./event.js";
 
+import { staticcall } from "./staticcall.js";
 
-const ALCHEMY_MAINNET_URL = config.ALCHEMY_MAINNET_URL;
-const provider = new ethers.JsonRpcProvider(ALCHEMY_MAINNET_URL)
+import { testErc721 } from "./erc721.js";
+
+import { batchWallet } from "./batchWallet.js";
+
 
  
 const main = async () => {
@@ -23,7 +24,15 @@ const main = async () => {
 
     // testDeploy();
 
-    testEvent();
+    // testEvent();
+
+    // staticcall();
+
+    // testErc721();
+
+    batchWallet();
+
+    
 }
 
 main();
