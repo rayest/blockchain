@@ -11,6 +11,9 @@ import { testErc721 } from "./erc721.js";
 
 import { batchWallet } from "./batchWallet.js";
 
+import { testMemPool } from "./mempool.js";
+import { testParseTx } from "./tx.js";
+
 
  
 const main = async () => {
@@ -30,7 +33,11 @@ const main = async () => {
 
     // testErc721();
 
-    batchWallet();
+    // batchWallet();
+
+    // testMemPool();
+
+    // testParseTx();
 
     
 }
