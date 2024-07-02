@@ -1,0 +1,38 @@
+// huffc src/HorseStore.huff 编译
+// huffc src/HorseStore.huff -b    * 返回 60008060093d393df3 * 这是 Contract creation code
+
+
+#define macro MAIN() = takes(0) returns(0){
+    0x00                // [0]
+    // 0x02             // [2,0]
+    calldataload        // [calldata]
+
+
+    // 0x 0b 分别是前缀
+    // cast --to-base 0x0102 bin
+    // cast --to-base 0xF1 dec  
+    // 0x01 02 ===> 0b 1 00000010  前者表示2个字节，十六进制。等价与后者的二进制表示方式
+    // 0xF1 02 ===> 0b 11110001 00000010
+    // 0b100000010 >> 2 shr 向右移动2位
+    //  0b01000000
+
+    0xe0                // [0xe0 calldata(bytes32)]
+
+    shr
+
+    // 0xcdfead2e is "updateHorseNumber(uint256)"
+    // 0xc015106a is "getNumberOfHorse""
+
+    0xcdfead2e          // [0xcdfead2e, function_selector]
+    eq                  // true if function_selector_matches
+
+    // jump to updateHorseNumber code if true
+    updateJump
+    jumpi               //  []         
+
+    updateJump:
+        SET_NUMBER_OF_HORSES()
+
+}
+#define macro SET_NUMBER_OF_HORSES() = takes(0) returns(0){}
+
