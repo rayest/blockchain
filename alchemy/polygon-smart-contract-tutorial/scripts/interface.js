@@ -15,9 +15,17 @@ const lockContract = new hre.ethers.Contract(
   wallet
 );
 
-const main = async () => {
+async function main() {
   const owner = await lockContract.owner();
   console.log("owner: ", owner);
-};
 
-main();
+  const unlockTime = await lockContract.unlockTime();
+  console.log("unlockTime: ", unlockTime);
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
