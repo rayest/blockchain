@@ -2,6 +2,10 @@ require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
+const { ProxyAgent, setGlobalDispatcher } = require("undici");
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7897");
+setGlobalDispatcher(proxyAgent);
+
 const { API_URL, PRIVATE_KEY } = process.env;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 
@@ -12,11 +16,14 @@ module.exports = {
     hardhat: {},
     sepolia: {
       url: API_URL,
-      accounts: [`0x${PRIVATE_KEY}`]
+      accounts: [`0x${PRIVATE_KEY}`],
     },
   },
 
+ 
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY
-  }
-}
+    apiKey: {
+      sepolia: ETHERSCAN_API_KEY,
+    },
+  },
+};
