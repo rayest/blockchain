@@ -3,7 +3,11 @@ require("dotenv").config();
 require("@nomicfoundation/hardhat-ethers");
 require("@nomicfoundation/hardhat-ignition-ethers");
 
-const { API_URL, PRIVATE_KEY } = process.env;
+const { ProxyAgent, setGlobalDispatcher } = require("undici");
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7897");
+setGlobalDispatcher(proxyAgent);
+
+const { API_URL, PRIVATE_KEY, ETHERSCAN_API_KEY} = process.env;
 
 module.exports = {
   solidity: {
@@ -35,5 +39,9 @@ module.exports = {
       url: API_URL,
       accounts: [`0x${PRIVATE_KEY}`],
     },
+  },
+
+   etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
   },
 };

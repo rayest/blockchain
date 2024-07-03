@@ -11,4 +11,8 @@ REPORT_GAS=true npx hardhat test
 npx hardhat node
 
 npx hardhat ignition deploy ./ignition/modules/Lock.js
+
+# use hardhat ignition to verify the contract
+# npx hardhat ignition verify sepolia-deployment. (you can find it in the path : ignition/deployments/deployment-id)
+hh ignition verify chain-11155111
 ```
