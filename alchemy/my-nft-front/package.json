@@ -1,25 +1,25 @@
 {
-  "name": "my-nft-front-2",
+  "name": "my-nft-front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.7",
-    "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "alchemy-sdk": "^3.3.1",
-    "axios": "^1.7.2",
+    "alchemy-sdk": "^2.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "url": "^0.11.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

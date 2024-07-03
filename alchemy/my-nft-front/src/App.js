@@ -1,4 +1,4 @@
-import Minter from "./Minter.js";
+import Minter from './Minter.js'
 
 function App() {
   return (
