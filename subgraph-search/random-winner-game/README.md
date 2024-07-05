@@ -33,8 +33,12 @@ graph init \
 
 # 2. auth
 graph auth --studio auth-key 
-# 3. codegen
+
+
+# 3. codegen 可以根据业务需要修改实体，然后重新生成代码。生成的代码在 ../generated/schema 
 graph codegen
+
+# 3.1 生成代码后，在 subgraph 的 src 目录下的 random-winner-game/src/random-winner-game.ts 文件中添加实体的处理逻辑
 
 # 4. build
 graph build
@@ -51,4 +55,5 @@ curl https://api.studio.thegraph.com/query/77347/random-winner-game/v0.0.1 \-X P
 ## frontend 
 ```shell
 # here front end is a simple js file
+# 通过 ethers.js 连接到以太坊网络，然后调用合约的方法，触发事件，再通过 subgraph 查询事件的数据
 ```
