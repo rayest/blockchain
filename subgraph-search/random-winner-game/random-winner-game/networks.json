@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "RandomWinnerGame": {
+      "address": "0x250529e7F41B9ABA0789C2384f56D9Ad42a6E41E",
+      "startBlock": 9006118
+    }
+  }
+}
