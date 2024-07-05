@@ -1,0 +1,19 @@
+## Getting Started
+
+`npm install` to install dependencies
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+* some changes need to make:
+1. Update the contractAddress in pages/index.js
+2. Update the name strings to be your own name in pages/index.js
+3. Ensure that the contract ABI matches your contract in utils/BuyMeACoffee.json
