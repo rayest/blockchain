@@ -8,7 +8,8 @@ import {
   GameEnded,
   GameStarted,
   OwnershipTransferred,
-  PlayerJoined
+  PlayerJoined,
+  Game
 } from "../generated/schema"
 
 export function handleGameEnded(event: GameEndedEvent): void {
@@ -24,6 +25,13 @@ export function handleGameEnded(event: GameEndedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let game = Game.load(event.params.gameId.toString())
+  if (!game) {
+    return;
+  }
+  game.winner = event.params.winner
+  game.save()
 }
 
 export function handleGameStarted(event: GameStartedEvent): void {
@@ -39,6 +47,16 @@ export function handleGameStarted(event: GameStartedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let game = Game.load(event.params.gameId.toString())
+  if (!game) {
+    game = new Game(event.params.gameId.toString())
+    game.players = []
+    return;
+  }
+  game.maxPlayers = event.params.maxPlayers
+  game.entryFee = event.params.entryFee
+  game.save()
 }
 
 export function handleOwnershipTransferred(
@@ -69,4 +87,14 @@ export function handlePlayerJoined(event: PlayerJoinedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  let game = Game.load(event.params.gameId.toString())
+  if (!game) {
+    return;
+  }
+  let players = game.players
+  players.push(event.params.player)
+  game.players = players
+  game.save()
+
 }
