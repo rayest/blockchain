@@ -10,3 +10,4 @@
 **/.DS_Store
 
 /speed-run-ethereum/
+**/package-lock.json
