@@ -11,3 +11,6 @@
 
 /speed-run-ethereum/
 **/package-lock.json
+**/.github/
+**/lib/
+**/yarn.lock
