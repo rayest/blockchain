@@ -34,3 +34,23 @@ curl https://api.studio.thegraph.com/query/77347/random-winner-game/v0.0.1 \-X P
 # 5. 自定义实体。初始化的 project 会默认生成一些基于 Event 的实体。如果需要自定义查询需要先定义新实体 --> build --> 在 xxx.ts 文件中对应的 Event handle 下处理生成或者更新实体 Entity 的逻辑 --> deploy
 ```
 
+### hardhat
+
+```js
+// add when verify to avoid timeout 
+const { ProxyAgent, setGlobalDispatcher } = require("undici");
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7897"); // it's up to the proxy settings
+setGlobalDispatcher(proxyAgent);
+
+// add when smart contract is too large
+settings: {
+    optimizer: {
+      enabled: true,
+      runs: 200,
+    },
+  },
+    
+
+    
+```
+
