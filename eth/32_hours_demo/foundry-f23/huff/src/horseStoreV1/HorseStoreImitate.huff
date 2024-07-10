@@ -1,11 +1,11 @@
 // huffc src/HorseStore.huff 编译
 // huffc src/HorseStore.huff -b    * 返回 60008060093d393df3 * 这是 Contract creation code
 
-
+// 所有的操作都是基于栈的操作
 #define macro MAIN() = takes(0) returns(0){
-    0x00                // [0]
-    // 0x02             // [2,0]
-    calldataload        // [calldata]
+    0x00                // [0]           5f
+    // 0x02             // [2,0]         5f
+    calldataload        // [calldata]    35
 
 
     // 0x 0b 分别是前缀
@@ -16,19 +16,23 @@
     // 0b100000010 >> 2 shr 向右移动2位
     //  0b01000000
 
-    0xe0                // [0xe0 calldata(bytes32)]
+    0xe0                // [0xe0 calldata(bytes32)] 224bits =  256 - 32 = 32bytes-4bytes
 
-    shr
+    shr                 // [function_selector]    将 calldata(bytes32) 向右移动 0xe0 位，返回为 function_selector
 
     // 0xcdfead2e is "updateHorseNumber(uint256)"
-    // 0xc015106a is "getNumberOfHorse""
+    // 0xc015106a is "getNumberOfHorse()"
 
-    0xcdfead2e          // [0xcdfead2e, function_selector]
+    0xcdfead2e          // [0xcdfead2e, function_selector]。或者使用 dup1 指令
     eq                  // true if function_selector_matches
 
     // jump to updateHorseNumber code if true
-    updateJump
+    updateJump // 这是一个标签，用于跳转
     jumpi               //  []         
+
+    0x01      // 如果 满足 jump 条件，则直接跳转到 updateJump 标签处并执行，而不会执行该行指令
+
+    0x00 0x00 revert
 
     updateJump:
         SET_NUMBER_OF_HORSES()
