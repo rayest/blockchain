@@ -64,10 +64,3 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
-
-### huff
-```shell 
-$ huffc src/HorseStore.huff -b    * 返回 60008060093d393df3 * 这是 Contract creation code
-
-# opcodes 39 表示 CODECOPY 指令
-```
