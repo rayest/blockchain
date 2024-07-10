@@ -43,3 +43,6 @@
 [submodule "eth/32_hours_demo/foundry-f23/huff/lib/forge-std"]
 	path = eth/32_hours_demo/foundry-f23/huff/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "eth/32_hours_demo/foundry-f23/huff/lib/foundry-huff"]
+	path = eth/32_hours_demo/foundry-f23/huff/lib/foundry-huff
+	url = https://github.com/huff-language/foundry-huff
