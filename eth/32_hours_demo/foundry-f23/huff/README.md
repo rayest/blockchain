@@ -18,3 +18,6 @@ forge test --match-path test/v1/HorseStorageHuff.t.sol --debug testReadValue -vv
 
 ### Notes
 * HorseStorage 使用了 solidity 和 huff 编写的两种合约代码，其中 solidity 版本的合约代码在 `src/HorseStore.sol` 文件中，huff 版本的合约代码在 `src/HorseStore.huff` 文件中。实现的功能是存储和读取一个 uint256 类型的值。在测试中，我们会测试两种合约代码的功能是否一致。
+
+### 逐行分析字节码 evm 
+> please refer to breakdowns/solc-breakdowns.c++
