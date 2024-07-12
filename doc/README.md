@@ -54,3 +54,58 @@ settings: {
     
 ```
 
+### solc-election
+
+1.  用于选择不同版本的 solidity 编译器
+
+```shell
+$ solc-select install 0.8.20
+$ solc-select use 0.8.20
+```
+
+### Formal Verification
+
+####  halmos
+
+```shell
+$ halmos --function check_hellFunc_doesnt_revert_halmos  
+```
+
+
+
+#### certoraRun
+
+```shell
+$ pip3 install certora-cli
+```
+
+1. 注册获取 APP_KEY
+
+2. 编写需要测试的规则
+
+   1. 在 /test/spec/xxxx.spec 中定义需要测试的规则说明，这个需要参考 certora 的语法说明
+
+3. 编写需要测试的规则
+
+   1. 在 /test/config/xxx.conf 中配置需要测试的 xxx.sol 合约、以及需要验证 verify 的 xxx.spec 
+
+   ```json
+   
+   {
+       "files": [
+           "./src/invariant-break/FormalVerificationCatches.sol"
+       ],
+       "verify": "FormalVerificationCatches:./test/invariant-break/formal-verification/certora/spec/FVCatches.spec",
+       "wait_for_results": "all",
+       "rule_sanity": "basic",
+       "optimistic_loop": true,
+       "msg": "Verification of FormalVerificationCatches"
+   }
+   ```
+
+4. 运行 
+
+```shell
+$ certoraRun ./test/invariant-break/formal-verification/certora/conf/FVCatches.conf
+```
+

@@ -21,3 +21,9 @@ forge test --match-path test/v1/HorseStorageHuff.t.sol --debug testReadValue -vv
 
 ### 逐行分析字节码 evm 
 > please refer to breakdowns/solc-breakdowns.c++
+
+
+### yul
+ ```shell
+ solc --strict-assembly --optimize --optimize-runs 20000 ./yul/HorseStoreYul.yul --bin | grep 60
+ ```
