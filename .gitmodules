@@ -46,3 +46,6 @@
 [submodule "eth/32_hours_demo/foundry-f23/huff/lib/foundry-huff"]
 	path = eth/32_hours_demo/foundry-f23/huff/lib/foundry-huff
 	url = https://github.com/huff-language/foundry-huff
+[submodule "sc-exploits-minimized/lib/halmos-cheatcodes"]
+	path = sc-exploits-minimized/lib/halmos-cheatcodes
+	url = https://github.com/a16z/halmos-cheatcodes
