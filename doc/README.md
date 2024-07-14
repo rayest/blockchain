@@ -109,3 +109,18 @@ $ pip3 install certora-cli
 $ certoraRun ./test/invariant-break/formal-verification/certora/conf/FVCatches.conf
 ```
 
+### zkSync
+
+1. npm install -g zksync-cli
+2. start docker
+
+> 如果后续使用 zksync-cli dev start 失败时，删除 docker 相关容器和镜像
+
+3. zksync-cli dev start 启动本地 zkSync 网络
+4. 使用 hardhat 启动代码模板 
+> npx zksync-cli@latest create --template qs-hello-zksync hello-zksync-quickstart
+   cd hello-zksync-quickstart
+
+5. 配置编译器
+
+> 执行 hardhat compile 时会下载 zksolc，如果网络很慢或者超时，可以在 hardhat.config.ts 中配置本地的编译器路径。
