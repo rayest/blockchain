@@ -27,5 +27,25 @@ describe("CrowdfundingCampaign", function () {
         campaign.connect(address1).contribute({ value: ethers.parseEther("0") })
       ).to.be.revertedWith("Contribution must be greater than 0");
     });
+
+    it("Should aggregate contributions", async function () {
+      await campaign
+        .connect(address1)
+        .contribute({ value: ethers.parseEther("1") });
+      await campaign
+        .connect(address2)
+        .contribute({ value: ethers.parseEther("1") });
+      expect(await campaign.getTotalFundsRaised()).to.equal(
+        ethers.parseEther("2")
+      );
+    });
+
+    it("Should emit GoalReached Event when funding goal is reached", async function () {
+      await expect(
+        campaign.connect(address1).contribute({ value: ethers.parseEther("2") })
+      )
+        .to.emit(campaign, "GoalReached")
+        .withArgs(ethers.parseEther("2"));
+    });
   });
 });
