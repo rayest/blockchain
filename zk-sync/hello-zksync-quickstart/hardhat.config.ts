@@ -5,7 +5,7 @@ import "@matterlabs/hardhat-zksync";
 require("dotenv").config();
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "zkSyncSepoliaTestnet",
+  defaultNetwork: "inMemoryNode",
   networks: {
     zkSyncSepoliaTestnet: {
       url: "https://sepolia.era.zksync.dev",
