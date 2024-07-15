@@ -3,6 +3,7 @@
 **/.env
 **/.vscode/
 
+open-sources/
 # vscode files
 .vscode/setting.json
 
