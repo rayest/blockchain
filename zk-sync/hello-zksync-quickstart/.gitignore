@@ -5,3 +5,4 @@ cache-zk/
 
 deployments-zk/
 *.log
+.upgradable/
