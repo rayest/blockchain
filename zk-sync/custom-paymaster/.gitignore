@@ -1,0 +1,7 @@
+node_modules
+artifacts-zk
+cache-zk
+.env
+deployments-zk/
+deployments/
+
