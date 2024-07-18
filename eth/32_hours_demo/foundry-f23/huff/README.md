@@ -27,3 +27,20 @@ forge test --match-path test/v1/HorseStorageHuff.t.sol --debug testReadValue -vv
  ```shell
  solc --strict-assembly --optimize --optimize-runs 20000 ./yul/HorseStoreYul.yul --bin | grep 60
  ```
+
+ ### foundry
+ ```shell
+ # DEPLOY TO SEPOLIA
+ forge script --chain sepolia script/AssemblyVariableScript.s.sol:AssemblyVariableScript --rpc-url $SEPOLIA_RPC_URL --broadcast
+
+
+# deploy to local
+ forge script script/AssemblyVariableScript.s.sol:AssemblyVariableScript --fork-url http://localhost:8545 --broadcast
+
+
+ # test matched contract: only test AssemblyVariableTest contract
+ forge test --match-contract AssemblyVariableTest
+
+# test matched function: only test 
+forge test --match-contract AssemblyVariableTest --match-path 
+ ```
