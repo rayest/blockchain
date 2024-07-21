@@ -23,5 +23,12 @@ contract EtherWallet {
         require(msg.sender == owner, "Not owner");
     }
 
+    function transferTo(address to, uint256 amount) public {
+        require(msg.sender == owner, "Not owner");
+        require(address(this).balance >= amount, "Insufficient balance");
+        (bool success,) = payable(to).call{value: amount}("");
+        require(success, "Failed to transfer Ether");
+    }
+
     receive() external payable {}
 }
