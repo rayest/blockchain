@@ -52,3 +52,6 @@
 [submodule "security/security-samples/lib/forge-std"]
 	path = security/security-samples/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "wallet/wallet-core/lib/forge-std"]
+	path = wallet/wallet-core/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
