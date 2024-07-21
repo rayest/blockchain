@@ -49,3 +49,6 @@
 [submodule "sc-exploits-minimized/lib/halmos-cheatcodes"]
 	path = sc-exploits-minimized/lib/halmos-cheatcodes
 	url = https://github.com/a16z/halmos-cheatcodes
+[submodule "security/security-samples/lib/forge-std"]
+	path = security/security-samples/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
