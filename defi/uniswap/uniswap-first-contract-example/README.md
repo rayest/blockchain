@@ -9,3 +9,11 @@ Learn to build your first on chain integration here: https://uniswap.org/blog/yo
 5. code swap function in contract
 6. code test for swap function
 7. run test in localhost `npx hardhat test --network localhost`
+
+### What to do next
+1. Build a front end to interact with your contract.
+2. Add an Exact Output Swap function to `SimpleSwap.sol`.
+3. Write a `GeneralSwap` contract that can swap between any two tokens of ERC20.
+4. Write a `Quote` contract that gets current price for swaps without actually performing a swap.
+5. Deploy contract to test net like sepolia.
+6. 
