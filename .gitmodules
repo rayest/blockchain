@@ -58,3 +58,6 @@
 [submodule "defi/uniswap/clamm/lib/forge-std"]
 	path = defi/uniswap/clamm/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "defi/uniswap/v3-sdk/lib/forge-std"]
+	path = defi/uniswap/v3-sdk/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
