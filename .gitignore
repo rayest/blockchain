@@ -16,3 +16,4 @@ open-sources/
 **/lib/
 **/yarn.lock
 .vscode/
+**/clamm/**
