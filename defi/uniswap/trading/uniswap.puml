@@ -1,0 +1,12 @@
+@startuml
+start
+:开始;
+:步骤 1;
+if (条件 A?) then (是)
+  :步骤 2A;
+else (否)
+  :步骤 2B;
+endif
+:步骤 3;
+stop
+@enduml

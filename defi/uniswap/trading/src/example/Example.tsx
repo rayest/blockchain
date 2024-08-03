@@ -1,7 +1,6 @@
 import './Example.css'
 
-import React, { useCallback, useEffect, useState } from 'react'
-
+import { useCallback, useEffect, useState } from 'react'
 import { CurrentConfig, Environment } from '../config'
 import {
   connectBrowserExtensionWallet,
