@@ -13,7 +13,6 @@ const browserExtensionProvider = createBrowserExtensionProvider();
 let walletExtensionAddress: string | null = null;
 
 // Interfaces
-
 export enum TransactionState {
   Failed = "Failed",
   New = "New",
@@ -23,7 +22,6 @@ export enum TransactionState {
 }
 
 // Provider and Wallet Functions
-
 export function getMainnetProvider(): BaseProvider {
   return mainnetProvider;
 }

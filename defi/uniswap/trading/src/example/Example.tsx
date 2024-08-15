@@ -52,7 +52,6 @@ const Example = () => {
   }, [])
 
   // Event Handlers
-
   const onConnectWallet = useCallback(async () => {
     if (await connectBrowserExtensionWallet()) {
       refreshBalances()
