@@ -14,7 +14,7 @@ import { getCurrencyBalance, wrapETH } from '../libs/wallet'
 
 const useOnBlockUpdated = (callback: (blockNumber: number) => void) => {
   useEffect(() => {
-    const subscription = getProvider()?.on('block', callback)
+    const subscription = getProvider()?.on('block', callback) // 通过 provider 的 on 方法监听 block 事件
     return () => {
       subscription?.removeAllListeners()
     }
@@ -80,28 +80,38 @@ const Example = () => {
             Please install a wallet to use this example configuration
           </h2>
         )}
+      
       <h3>
         Trading {CurrentConfig.tokens.amountIn} {CurrentConfig.tokens.in.symbol}{' '}
         for {CurrentConfig.tokens.out.symbol}
       </h3>
+      
       <h3>{trade && `Constructed Trade: ${displayTrade(trade)}`}</h3>
+      
       <button onClick={onCreateTrade}>
         <p>Create Trade</p>
       </button>
+      
       <h3>{`Wallet Address: ${getWalletAddress()}`}</h3>
       {CurrentConfig.env === Environment.WALLET_EXTENSION &&
         !getWalletAddress() && (
           <button onClick={onConnectWallet}>Connect Wallet</button>
         )}
+      
       <h3>{`Block Number: ${blockNumber + 1}`}</h3>
+      
       <h3>{`Transaction State: ${txState}`}</h3>
+      
       <h3>{`${CurrentConfig.tokens.in.symbol} Balance: ${tokenInBalance}`}</h3>
+      
       <h3>{`${CurrentConfig.tokens.out.symbol} Balance: ${tokenOutBalance}`}</h3>
+
       <button
         onClick={() => wrapETH(100)}
         disabled={getProvider() === null || CurrentConfig.rpc.mainnet === ''}>
         <p>Wrap ETH</p>
       </button>
+
       <button
         onClick={() => onTrade(trade)}
         disabled={

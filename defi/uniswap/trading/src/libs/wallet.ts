@@ -39,6 +39,8 @@ export async function getCurrencyBalance(
 }
 
 // wraps ETH (rounding up to the nearest ETH for decimal places)
+// WETH 是 Wrapped Ether 的缩写，是以太坊上的一种 ERC20 代币，用来代表以太坊。
+// 这个函数表示将 ETH 包装成 WETH，number 类型的 eth 参数表示要包装的 ETH 数量
 export async function wrapETH(eth: number) {
   const provider = getProvider()
   const address = getWalletAddress()
