@@ -7,6 +7,10 @@ export const POOL_FACTORY_CONTRACT_ADDRESS =
   "0x1F98431c8aD98523631AE4a59f267346ea31F984"; // 这个是 Uniswap V3 的工厂合约地址。 Uniswap V3 的工厂合约地址是固定的，不同的 Uniswap V3 交易对是通过工厂合约的 createPool 方法创建的。
 export const QUOTER_CONTRACT_ADDRESS =
   "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"; // 这个是 Uniswap V3 的 Quoter 合约地址。 Quoter 合约是用来计算交易的价格的。
+
+export const QUOTER_CONTRACT_ADDRESS_FOR_QUOTE =
+  "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
+
 export const SWAP_ROUTER_ADDRESS = "0xE592427A0AEce92De3Edee1F18E0157C05861564"; // 这个是 Uniswap V3 的 SwapRouter 合约地址。 SwapRouter 合约是用来执行交易的。
 export const WETH_CONTRACT_ADDRESS =
   "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"; // 这个是 WETH 的合约地址。 WETH 是 Wrapped Ether 的缩写，是以太坊上的一种 ERC20 代币，用来代表以太坊。

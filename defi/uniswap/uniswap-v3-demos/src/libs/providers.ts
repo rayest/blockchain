@@ -26,10 +26,8 @@ export function getMainnetProvider(): BaseProvider {
   return mainnetProvider;
 }
 
-export function getProvider(): providers.Provider | null {
-  return CurrentConfig.env === Environment.WALLET_EXTENSION
-    ? browserExtensionProvider
-    : wallet.provider;
+export function getProvider(): providers.Provider{
+  return wallet.provider;
 }
 
 export function getWalletAddress(): string | null {

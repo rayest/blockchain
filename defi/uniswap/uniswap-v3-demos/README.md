@@ -47,3 +47,8 @@ This example uses the first sample wallet offered by Foundry (listed in the term
 ### Start the web interface
 
 Run `yarn start` and navigate to [http://localhost:3000/](http://localhost:3000/)
+
+## More To Do
+- [ ] Add more styles to the web interface
+- [ ] Add mint positions to create a new position
+- [ ] Add Quotes to get the best price for a trade
