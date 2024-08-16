@@ -7,13 +7,13 @@ import {
   getProvider,
   getWalletAddress,
   TransactionState,
-} from '../libs-bak/providers'
+} from '../libs/providers'
 import { createTrade, executeTrade, TokenTrade } from '../libs/trading'
 import { displayTrade } from '../libs/utils'
-import { getCurrencyBalance, wrapETH } from '../libs-bak/wallet'
+import { getCurrencyBalance, wrapETH } from '../libs/wallet'
 import { quote } from '../libs/quote'
 import { SwapRoute } from '@uniswap/smart-order-router'
-import { generateRoute } from '../libs-bak/routing'
+import { generateRoute } from '../libs/routing'
 import { executeRoute } from '../libs/routing'
 
 
@@ -140,22 +140,25 @@ const Uniswap = () => {
 
         <span>{`${CurrentConfig.tokens.out.symbol} Balance: ${tokenOutBalance}`}</span>
 
-        <button
-          onClick={() => wrapETH(100)}
-          disabled={getProvider() === null || CurrentConfig.rpc.mainnet === ''}>
-          <p>Wrap ETH</p>
-        </button>
+        <div className="trade-button">
+          <button
+            onClick={() => wrapETH(100)}
+            disabled={getProvider() === null || CurrentConfig.rpc.mainnet === ''}>
+            <p>Wrap ETH</p>
+          </button>
 
-        <button
-          onClick={() => onTrade(trade)}
-          disabled={
-            trade === undefined ||
-            txState === TransactionState.Sending ||
-            getProvider() === null ||
-            CurrentConfig.rpc.mainnet === ''
-          }>
-          <p>Trade</p>
-        </button>
+          <button
+            onClick={() => onTrade(trade)}
+            disabled={
+              trade === undefined ||
+              txState === TransactionState.Sending ||
+              getProvider() === null ||
+              CurrentConfig.rpc.mainnet === ''
+            }>
+            <p>Trade</p>
+          </button>
+        </div>
+
       </div>
 
       <div className="quote">
@@ -180,12 +183,14 @@ const Uniswap = () => {
         <span>
           {`Token Out (${CurrentConfig.tokens.out.symbol}) Balance: ${tokenOutBalance}`}
         </span>
-        <button onClick={onCreateRoute}>
-          <p>Create Route</p>
-        </button>
-        <button onClick={() => executeSwap(route)}>
-          <p>Swap Using Route</p>
-        </button>
+        <div className='route-button'>
+          <button onClick={onCreateRoute}>
+            <p>Create Route</p>
+          </button>
+          <button onClick={() => executeSwap(route)}>
+            <p>Swap Using Route</p>
+          </button>
+        </div>
 
         <div className='mint-position'>
           <h5>
