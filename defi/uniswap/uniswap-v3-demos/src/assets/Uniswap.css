@@ -71,6 +71,12 @@ button:active {
   margin-top: 2em;
 }
 
+.route {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
 .mint-position {
   display: flex;
   flex-direction: column;

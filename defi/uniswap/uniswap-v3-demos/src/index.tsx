@@ -1,13 +1,11 @@
-import './index.css'
-
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
-import Example from './example/Example'
+import './index.css'
+import Uniswap from './pages/Uniswap'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <Example />
+    <Uniswap />
   </React.StrictMode>
 )

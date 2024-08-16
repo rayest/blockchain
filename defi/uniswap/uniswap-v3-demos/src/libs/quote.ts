@@ -7,10 +7,11 @@ import {
 } from "./constants";
 import Quoter from "@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json";
 
-import { getProvider } from "../libs/providers";
-import { fromReadableAmount, toReadableAmount } from "./utils";
+import { getProvider } from "./providers";
+
 import { CurrentConfig } from "../config";
 import { computePoolAddress } from "@uniswap/v3-sdk";
+import { fromReadableAmount, toReadableAmount } from "./utils";
 
 export async function quote(): Promise<string> {
   const quoteContract = new ethers.Contract(

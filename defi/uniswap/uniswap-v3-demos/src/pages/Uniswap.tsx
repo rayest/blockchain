@@ -1,4 +1,4 @@
-import './Example.css'
+import '../assets/Uniswap.css'
 
 import { useCallback, useEffect, useState } from 'react'
 import { CurrentConfig, Environment } from '../config'
@@ -7,11 +7,15 @@ import {
   getProvider,
   getWalletAddress,
   TransactionState,
-} from '../libs/providers'
+} from '../libs-bak/providers'
 import { createTrade, executeTrade, TokenTrade } from '../libs/trading'
 import { displayTrade } from '../libs/utils'
-import { getCurrencyBalance, wrapETH } from '../libs/wallet'
+import { getCurrencyBalance, wrapETH } from '../libs-bak/wallet'
 import { quote } from '../libs/quote'
+import { SwapRoute } from '@uniswap/smart-order-router'
+import { generateRoute } from '../libs-bak/routing'
+import { executeRoute } from '../libs/routing'
+
 
 const useOnBlockUpdated = (callback: (blockNumber: number) => void) => {
   useEffect(() => {
@@ -22,16 +26,17 @@ const useOnBlockUpdated = (callback: (blockNumber: number) => void) => {
   })
 }
 
-const Example = () => {
+const Uniswap = () => {
   const [trade, setTrade] = useState<TokenTrade>()
   const [txState, setTxState] = useState<TransactionState>(TransactionState.New)
 
   const [tokenInBalance, setTokenInBalance] = useState<string>()
   const [tokenOutBalance, setTokenOutBalance] = useState<string>()
   const [blockNumber, setBlockNumber] = useState<number>(0)
+  const [route, setRoute] = useState<SwapRoute | null>(null)
 
   // 获取 Quote 报价
-  const [outputAmount, setOutputAmount] = useState<string>()
+  const [outputAmount, setOutputAmount] = useState<string>("0")
   const onQuote = useCallback(async () => {
     setOutputAmount(await quote())
   }, [])
@@ -75,6 +80,21 @@ const Example = () => {
     if (trade) {
       setTxState(await executeTrade(trade))
     }
+  }, [])
+
+  // route
+  const onCreateRoute = useCallback(async () => {
+    setRoute(await generateRoute())
+  }, [])
+
+  const executeSwap = useCallback(async (route: SwapRoute | null) => {
+    if (!route) {
+      console.log('route is null')
+      // todo add alert message
+      return
+    }
+    setTxState(TransactionState.Sending)
+    setTxState(await executeRoute(route))
   }, [])
 
   return (
@@ -140,26 +160,44 @@ const Example = () => {
 
       <div className="quote">
         <h5>
-          Lesson Three: Quote
+          Lesson Two: Quote
         </h5>
-       
-        <span>{`Quote input amount: ${CurrentConfig.tokens.amountIn} ${CurrentConfig.tokens.in.symbol}`}</span>
-        <span>{`Quote output amount: ${outputAmount} ${CurrentConfig.tokens.out.symbol}`}</span>
+
+        <span>{`Input Amount: ${CurrentConfig.tokens.amountIn} ${CurrentConfig.tokens.in.symbol}`}</span>
+        <span>{`Output Amount: ${outputAmount} ${CurrentConfig.tokens.out.symbol}`}</span>
         <button onClick={onQuote}>
           <p>Quote</p>
         </button>
       </div>
 
-      <div className='mint-position'>
+      <div className="route">
         <h5>
-          Lesson Two: Mint Position
+          Lesson Three: Route
         </h5>
-        <button>
-          <p>Mint Position</p>
+        <span>
+          {`Token In (${CurrentConfig.tokens.in.symbol}) Balance: ${tokenInBalance}`}
+        </span>
+        <span>
+          {`Token Out (${CurrentConfig.tokens.out.symbol}) Balance: ${tokenOutBalance}`}
+        </span>
+        <button onClick={onCreateRoute}>
+          <p>Create Route</p>
         </button>
+        <button onClick={() => executeSwap(route)}>
+          <p>Swap Using Route</p>
+        </button>
+
+        <div className='mint-position'>
+          <h5>
+            Lesson X: Mint Position
+          </h5>
+          <button>
+            <p>Mint Position</p>
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default Example
+export default Uniswap

@@ -3,11 +3,15 @@
 import { SupportedChainId, Token } from "@uniswap/sdk-core";
 
 // Addresses
+export const V3_SWAP_ROUTER_ADDRESS =
+  "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
+
 export const POOL_FACTORY_CONTRACT_ADDRESS =
   "0x1F98431c8aD98523631AE4a59f267346ea31F984"; // 这个是 Uniswap V3 的工厂合约地址。 Uniswap V3 的工厂合约地址是固定的，不同的 Uniswap V3 交易对是通过工厂合约的 createPool 方法创建的。
 export const QUOTER_CONTRACT_ADDRESS =
   "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"; // 这个是 Uniswap V3 的 Quoter 合约地址。 Quoter 合约是用来计算交易的价格的。
 
+// https://github.com/Uniswap/v3-periphery/blob/main/deploys.md
 export const QUOTER_CONTRACT_ADDRESS_FOR_QUOTE =
   "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
 
@@ -59,4 +63,4 @@ export const WETH_ABI = [
 // Transactions
 export const MAX_FEE_PER_GAS = 100000000000;
 export const MAX_PRIORITY_FEE_PER_GAS = 100000000000;
-export const TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER = 2000;
+export const TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER = 10000;

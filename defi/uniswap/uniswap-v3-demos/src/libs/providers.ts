@@ -26,7 +26,7 @@ export function getMainnetProvider(): BaseProvider {
   return mainnetProvider;
 }
 
-export function getProvider(): providers.Provider{
+export function getProvider(): providers.Provider {
   return wallet.provider;
 }
 
@@ -41,12 +41,11 @@ export async function sendTransaction(
 ): Promise<TransactionState> {
   if (CurrentConfig.env === Environment.WALLET_EXTENSION) {
     return sendTransactionViaExtension(transaction);
-  } else {
-    if (transaction.value) {
-      transaction.value = BigNumber.from(transaction.value);
-    }
-    return sendTransactionViaWallet(transaction);
   }
+  if (transaction.value) {
+    transaction.value = BigNumber.from(transaction.value);
+  }
+  return sendTransactionViaWallet(transaction);
 }
 
 export async function connectBrowserExtensionWallet() {
@@ -134,6 +133,7 @@ async function sendTransactionViaWallet(
 
   // Transaction was successful if status === 1
   if (receipt) {
+    console.log("Transaction Receipt:", receipt);
     return TransactionState.Sent;
   } else {
     return TransactionState.Failed;
