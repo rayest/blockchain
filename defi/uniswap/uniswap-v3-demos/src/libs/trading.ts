@@ -38,7 +38,10 @@ export type TokenTrade = Trade<Token, Token, TradeType>;
 // 创建一个交易
 export async function createTrade(): Promise<TokenTrade> {
   // 获取当前的 pool 信息
-  const poolInfo = await getPoolInfo();
+  const poolInfo = await getPoolInfo(
+    CurrentConfig.tokens.in,
+    CurrentConfig.tokens.out
+  );
 
   // 创建一个 pool
   const pool = new Pool(

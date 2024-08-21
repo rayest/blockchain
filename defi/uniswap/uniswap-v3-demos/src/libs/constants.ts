@@ -3,6 +3,11 @@
 import { SupportedChainId, Token } from "@uniswap/sdk-core";
 
 // Addresses
+
+// for mint
+export const NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS =
+  "0xC36442b4a4522E871399CD717aBDD847Ab11FE88";
+
 export const V3_SWAP_ROUTER_ADDRESS =
   "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45";
 
@@ -37,6 +42,14 @@ export const USDC_TOKEN = new Token(
   "USD//C"
 );
 
+export const DAI_TOKEN = new Token(
+  SupportedChainId.MAINNET,
+  "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+  18,
+  "DAI",
+  "Dai Stablecoin"
+);
+
 // ABI's
 export const ERC20_ABI = [
   // Read-Only Functions
@@ -58,6 +71,16 @@ export const WETH_ABI = [
 
   // Unwrap ETH
   "function withdraw(uint wad) public",
+];
+
+
+export const NONFUNGIBLE_POSITION_MANAGER_ABI = [
+  // Read-Only Functions
+  "function balanceOf(address _owner) view returns (uint256)",
+  "function tokenOfOwnerByIndex(address _owner, uint256 _index) view returns (uint256)",
+  "function tokenURI(uint256 tokenId) view returns (string memory)",
+
+  "function positions(uint256 tokenId) external view returns (uint96 nonce, address operator, address token0, address token1, uint24 fee, int24 tickLower, int24 tickUpper, uint128 liquidity, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, uint128 tokensOwed0, uint128 tokensOwed1)",
 ];
 
 // Transactions

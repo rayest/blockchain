@@ -1,6 +1,6 @@
 import '../assets/Uniswap.css'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CurrentConfig, Environment } from '../config'
 import {
   connectBrowserExtensionWallet,
@@ -15,6 +15,7 @@ import { quote } from '../libs/quote'
 import { SwapRoute } from '@uniswap/smart-order-router'
 import { generateRoute } from '../libs/routing'
 import { executeRoute } from '../libs/routing'
+import { getPositionIds, getPositionInfo, mintPosition, PositionInfo } from '../libs/positions'
 
 
 const useOnBlockUpdated = (callback: (blockNumber: number) => void) => {
@@ -34,6 +35,13 @@ const Uniswap = () => {
   const [tokenOutBalance, setTokenOutBalance] = useState<string>()
   const [blockNumber, setBlockNumber] = useState<number>(0)
   const [route, setRoute] = useState<SwapRoute | null>(null)
+
+  // mint position
+  const [token0Balance, setToken0Balance] = useState<string>()
+  const [token1Balance, setToken1Balance] = useState<string>()
+  const [positionIds, setPositionIds] = useState<number[]>([])
+  const [positionsInfo, setPositionsInfo] = useState<PositionInfo[]>([])
+
 
   // 获取 Quote 报价
   const [outputAmount, setOutputAmount] = useState<string>("0")
@@ -62,6 +70,22 @@ const Uniswap = () => {
     setTokenOutBalance(
       await getCurrencyBalance(provider, address, CurrentConfig.tokens.out)
     )
+
+    // mint position
+    setToken0Balance(
+      await getCurrencyBalance(provider, address, CurrentConfig.tokensMint.token0)
+    )
+
+    setToken1Balance(
+      await getCurrencyBalance(provider, address, CurrentConfig.tokensMint.token1)
+    )
+
+    // Set Position Info
+    const ids = await getPositionIds()
+    setPositionIds(ids)
+    setPositionsInfo(await Promise.all(ids.map(getPositionInfo)))
+
+
   }, [])
 
   // Event Handlers
@@ -96,6 +120,26 @@ const Uniswap = () => {
     setTxState(TransactionState.Sending)
     setTxState(await executeRoute(route))
   }, [])
+
+  // mint position
+  const onMintPosition = useCallback(async () => {
+    setTxState(TransactionState.Sending)
+    setTxState(await mintPosition())
+  }, [])
+
+  const positionInfoStrings: string[] = useMemo(() => {
+    if (positionIds.length !== positionsInfo.length) {
+      return []
+    }
+
+    return positionIds
+      .map((id, index) => [id, positionsInfo[index]])
+      .map((info) => {
+        const id = info[0]
+        const posInfo = info[1] as PositionInfo
+        return `${id}: ${posInfo.liquidity.toString()} liquidity, owed ${posInfo.tokensOwed0.toString()} and ${posInfo.tokensOwed1.toString()}`
+      })
+  }, [positionIds, positionsInfo])
 
   return (
     <div className="App">
@@ -191,15 +235,27 @@ const Uniswap = () => {
             <p>Swap Using Route</p>
           </button>
         </div>
+      </div>
 
-        <div className='mint-position'>
-          <h5>
-            Lesson X: Mint Position
-          </h5>
-          <button>
-            <p>Mint Position</p>
-          </button>
-        </div>
+      <div className='mint-position'>
+        <h5>
+          Lesson Four: Mint Position
+        </h5>
+        <span>{`${CurrentConfig.tokensMint.token0.symbol} Balance: ${token0Balance}`}</span>
+        <span>{`${CurrentConfig.tokensMint.token1.symbol} Balance: ${token1Balance}`}</span>
+        <span> Positions:{' '}
+          {positionInfoStrings.map((s, i) => (
+            <p key={i}>{s}</p>
+          ))}</span>
+        <button
+          onClick={() => onMintPosition()}
+          disabled={
+            getProvider() === null ||
+            CurrentConfig.rpc.mainnet === '' ||
+            TransactionState.Sending === txState
+          }>
+          <p>Mint Position</p>
+        </button>
       </div>
     </div>
   )
