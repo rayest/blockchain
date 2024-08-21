@@ -1,0 +1,59 @@
+@startuml
+!define RECTANGLE class
+!define ARROW --> 
+
+RECTANGLE "步骤 1: MetaMask" {
+    :选择网络 Avalanche Fuji;
+}
+
+RECTANGLE "步骤 2: Remix IDE (Avalanche Fuji)" {
+    :选择 Injected Provider - MetaMask;
+    :填写区块链路由器地址 0xF694E193200268f9a4868e4Aa017A0118C9a8177;
+    :填写 LINK 合约地址 0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846;
+    :点击 deploy 按钮部署发送者合约;
+    :点击 transact 按钮确认交易;
+}
+
+RECTANGLE "步骤 3: Avalanche Fuji" {
+    :发送者合约部署成功;
+    :转账 0.002 CCIP-BnM 代币到合约地址;
+}
+
+RECTANGLE "步骤 4: MetaMask" {
+    :选择网络 以太坊 Sepolia;
+}
+
+RECTANGLE "步骤 5: Remix IDE (以太坊 Sepolia)" {
+    :选择 Injected Provider - MetaMask;
+    :填写区块链路由器地址 0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59;
+    :填写 LINK 合约地址 0x779877A7B0D9E8603169DdbD7836e478b4624789;
+    :点击 deploy 按钮部署接收者合约;
+    :点击 transact 按钮确认交易;
+}
+
+RECTANGLE "步骤 6: 以太坊 Sepolia" {
+    :接收者合约部署成功;
+}
+
+RECTANGLE "步骤 7: Remix IDE (Avalanche Fuji)" {
+    :调用 allowlistDestinationChain;
+    :传入目标链选择器 16015286601757825753，设置为 true;
+    :调用 allowlistSourceChain;
+    :传入源链选择器 14767482510784806043，设置为 true;
+    :调用 allowlistSender;
+    :传入 Avalanche Fuji 上的发送者合约地址，设置为 true;
+    :调用 setSimRevert;
+    :传入 true 作为参数模拟失败;
+}
+
+"步骤 1: MetaMask" --> "步骤 2: Remix IDE (Avalanche Fuji)" : 选择 Avalanche Fuji 网络;
+"步骤 2: Remix IDE (Avalanche Fuji)" --> "步骤 3: Avalanche Fuji" : 部署发送者合约;
+"步骤 3: Avalanche Fuji" --> "步骤 1: MetaMask" : 注资 0.002 CCIP-BnM 代币;
+"步骤 1: MetaMask" --> "步骤 4: MetaMask" : 选择以太坊 Sepolia 网络;
+"步骤 4: MetaMask" --> "步骤 5: Remix IDE (以太坊 Sepolia)" : 与以太坊 Sepolia 网络通信;
+"步骤 5: Remix IDE (以太坊 Sepolia)" --> "步骤 6: 以太坊 Sepolia" : 部署接收者合约;
+"步骤 6: 以太坊 Sepolia" --> "步骤 7: Remix IDE (Avalanche Fuji)" : 配置允许链和合约;
+"步骤 7: Remix IDE (Avalanche Fuji)" --> "步骤 5: Remix IDE (以太坊 Sepolia)" : 启用接收消息;
+"步骤 7: Remix IDE (Avalanche Fuji)" --> "步骤 6: 以太坊 Sepolia" : 启用接收消息;
+
+@enduml

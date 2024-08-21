@@ -1,0 +1,40 @@
+@startuml
+ 
+RECTANGLE "ProgrammableDefensiveTokenTransfers" {
+    RECTANGLE "constructor" as c
+    RECTANGLE "allowlistDestinationChain" as aldc
+    RECTANGLE "allowlistSourceChain" as alsc
+    RECTANGLE "allowlistSender" as als
+    RECTANGLE "sendMessagePayLINK" as smpl
+    RECTANGLE "sendMessagePayNative" as smpn
+    RECTANGLE "getLastReceivedMessageDetails" as glrmd
+    RECTANGLE "getFailedMessages" as gfm
+    RECTANGLE "ccipReceive" as ccr
+    RECTANGLE "processMessage" as pm
+    RECTANGLE "retryFailedMessage" as rfm
+    RECTANGLE "setSimRevert" as ssr
+    RECTANGLE "_buildCCIPMessage" as bccip
+    RECTANGLE "withdraw" as wd
+    RECTANGLE "withdrawToken" as wdt
+}
+
+c --> smpl : Initializes with _router and _link
+
+smpl --> bccip : Calls to build CCIP message
+smpn --> bccip : Calls to build CCIP message
+
+smpl --> ccr : Calls ccipSend function on IRouterClient
+smpn --> ccr : Calls ccipSend function on IRouterClient
+
+ccr --> pm : On success, calls processMessage
+ccr --> gfm : On failure, emits MessageFailed
+
+pm --> glrmd : Updates last received message details
+
+rfm --> glrmd : Updates message status to RESOLVED and transfers tokens
+ssr --> smpl : Changes simulation revert state
+
+wd --> glrmd : Withdraws ETH
+wdt --> glrmd : Withdraws ERC20 tokens
+
+@enduml

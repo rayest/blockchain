@@ -133,6 +133,10 @@ contract ProgrammableDefensiveTokenTransfers is CCIPReceiver, OwnerIsCreator {
         allowlistedSourceChains[_sourceChainSelector] = allowed;
     }
 
+    function allowlistSender(address _sender, bool allowed) external onlyOwner {
+        allowlistedSenders[_sender] = allowed;
+    }
+
     // 向目标链上的接收者发送数据和转移代币
     // 使用 LINK 代币支付费用
     function sendMessagePayLink(
