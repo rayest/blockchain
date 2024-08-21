@@ -30,6 +30,11 @@ export function getProvider(): providers.Provider {
   return wallet.provider;
 }
 
+export function getSigner(): ethers.Signer {
+  const provider = getProvider();
+  return wallet.connect(provider);
+}
+
 export function getWalletAddress(): string | null {
   return CurrentConfig.env === Environment.WALLET_EXTENSION
     ? walletExtensionAddress

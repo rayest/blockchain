@@ -8,12 +8,10 @@ import {
 } from "./providers";
 import { BigNumber, ethers } from "ethers";
 import {
-  ERC20_ABI,
   MAX_FEE_PER_GAS,
   MAX_PRIORITY_FEE_PER_GAS,
   NONFUNGIBLE_POSITION_MANAGER_ABI,
   NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS,
-  TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
 } from "./constants";
 import { fromReadableAmount } from "./utils";
 import {
@@ -24,6 +22,7 @@ import {
   Position,
 } from "@uniswap/v3-sdk";
 import { getPoolInfo } from "./pool";
+import {getTokenTransferApproval } from "./tokenApproval";
 
 export interface PositionInfo {
   tickLower: number;
@@ -44,10 +43,12 @@ export async function mintPosition(): Promise<TransactionState> {
 
   // approval
   const tokenInApproval = await getTokenTransferApproval(
-    CurrentConfig.tokensMint.token0
+    CurrentConfig.tokensMint.token0,
+    NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS
   );
   const tokenOutApproval = await getTokenTransferApproval(
-    CurrentConfig.tokensMint.token1
+    CurrentConfig.tokensMint.token1,
+    NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS
   );
   if (
     tokenInApproval !== TransactionState.Sent ||
@@ -130,44 +131,11 @@ export async function constructPosition(
   });
 }
 
-export async function getTokenTransferApproval(
-  token: Token
-): Promise<TransactionState> {
-  const provider = getProvider();
-  const address = getWalletAddress();
-  if (!provider || !address) {
-    return TransactionState.Failed;
-  }
-
-  try {
-    const ERC20Contract = new ethers.Contract(
-      token.address,
-      ERC20_ABI,
-      provider
-    );
-
-    const tokenBalance = await ERC20Contract.balanceOf(address);
-    console.log("balance before approval", tokenBalance);
-    const transaction = await ERC20Contract.populateTransaction.approve(
-      NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS,
-      fromReadableAmount(
-        TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
-        token.decimals
-      ).toString()
-    );
-    return sendTransaction({ ...transaction, from: address });
-  } catch (error) {
-    console.error("error approving token transfer", error);
-    return TransactionState.Failed;
-  }
-}
-
 export async function getPositionIds(): Promise<number[]> {
   const provider = getProvider();
   const address = getWalletAddress();
-    if (!provider || !address) {
-      throw new Error("No provider or address");
-
+  if (!provider || !address) {
+    throw new Error("No provider or address");
   }
 
   const positionContract = new ethers.Contract(
@@ -175,15 +143,15 @@ export async function getPositionIds(): Promise<number[]> {
     NONFUNGIBLE_POSITION_MANAGER_ABI,
     provider
   );
-    
-    const balance: number = await positionContract.balanceOf(address); 
 
-    const tokenIds = [];
-    for (let i = 0; i < balance; i++) {
-      const tokenId = await positionContract.tokenOfOwnerByIndex(address, i);
-      tokenIds.push(tokenId);
-    }
-    return tokenIds;
+  const balance: number = await positionContract.balanceOf(address);
+
+  const tokenIds = [];
+  for (let i = 0; i < balance; i++) {
+    const tokenId = await positionContract.tokenOfOwnerByIndex(address, i);
+    tokenIds.push(tokenId);
+  }
+  return tokenIds;
 }
 
 export async function getPositionInfo(tokenId: number): Promise<PositionInfo> {
@@ -198,14 +166,14 @@ export async function getPositionInfo(tokenId: number): Promise<PositionInfo> {
     provider
   );
 
-    const position = positionContract.positions(tokenId);
-    return {
-      tickLower: position.tickLower,
-      tickUpper: position.tickUpper,
-      liquidity: position.liquidity,
-      feeGrowthInside0LastX128: position.feeGrowthInside0LastX128,
-      feeGrowthInside1LastX128: position.feeGrowthInside1LastX128,
-      tokensOwed0: position.tokensOwed0,
-      tokensOwed1: position.tokensOwed1,
-    };
+  const position = positionContract.positions(tokenId);
+  return {
+    tickLower: position.tickLower,
+    tickUpper: position.tickUpper,
+    liquidity: position.liquidity,
+    feeGrowthInside0LastX128: position.feeGrowthInside0LastX128,
+    feeGrowthInside1LastX128: position.feeGrowthInside1LastX128,
+    tokensOwed0: position.tokensOwed0,
+    tokensOwed1: position.tokensOwed1,
+  };
 }

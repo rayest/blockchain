@@ -17,12 +17,7 @@ import { ethers } from "ethers";
 import JSBI from "jsbi";
 
 import { CurrentConfig } from "../config";
-import {
-  ERC20_ABI,
-  QUOTER_CONTRACT_ADDRESS,
-  SWAP_ROUTER_ADDRESS,
-  TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
-} from "./constants";
+import { QUOTER_CONTRACT_ADDRESS, SWAP_ROUTER_ADDRESS } from "./constants";
 import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from "./constants";
 import { getPoolInfo } from "./pool";
 import {
@@ -32,6 +27,7 @@ import {
   TransactionState,
 } from "./providers";
 import { fromReadableAmount } from "./utils";
+import { getTokenTransferApproval } from "./tokenApproval";
 
 export type TokenTrade = Trade<Token, Token, TradeType>;
 
@@ -94,7 +90,10 @@ export async function executeTrade(
   }
 
   // Give approval to the router to spend the token
-  const tokenApproval = await getTokenTransferApproval(CurrentConfig.tokens.in);
+  const tokenApproval = await getTokenTransferApproval(
+    CurrentConfig.tokens.in,
+    SWAP_ROUTER_ADDRESS
+  );
 
   // 如果授权失败，直接返回
   if (tokenApproval !== TransactionState.Sent) {
@@ -158,41 +157,4 @@ async function getOutputQuote(route: Route<Currency, Currency>) {
 
   // 解码返回数据
   return ethers.utils.defaultAbiCoder.decode(["uint256"], quoteCallReturnData);
-}
-
-export async function getTokenTransferApproval(
-  token: Token
-): Promise<TransactionState> {
-  const provider = getProvider(); // 用于发送交易的 provider
-  const address = getWalletAddress(); // 用于发送交易的地址
-  if (!provider || !address) {
-    console.log("No Provider Found");
-    return TransactionState.Failed;
-  }
-
-  try {
-    // 创建一个新的合约实例。这个合约实例是一个 ERC20 合约
-    const tokenContract = new ethers.Contract(
-      token.address,
-      ERC20_ABI,
-      provider
-    );
-
-    // 调用 approve 方法，授权 SWAP_ROUTER_ADDRESS 花费 指定数量的 token
-    const transaction = await tokenContract.populateTransaction.approve(
-      SWAP_ROUTER_ADDRESS,
-      fromReadableAmount(
-        TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
-        token.decimals
-      ).toString()
-    );
-
-    return sendTransaction({
-      ...transaction,
-      from: address,
-    });
-  } catch (e) {
-    console.error(e);
-    return TransactionState.Failed;
-  }
 }

@@ -1,11 +1,9 @@
 import {
-  ERC20_ABI,
   MAX_FEE_PER_GAS,
   MAX_PRIORITY_FEE_PER_GAS,
-  TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
   V3_SWAP_ROUTER_ADDRESS,
 } from "./constants";
-import { CurrencyAmount, Percent, TradeType, Token } from "@uniswap/sdk-core";
+import { CurrencyAmount, Percent, TradeType } from "@uniswap/sdk-core";
 import {
   AlphaRouter,
   ChainId,
@@ -22,7 +20,7 @@ import {
 } from "./providers";
 import { CurrentConfig } from "../config";
 import { fromReadableAmount } from "./utils";
-import { ethers } from "ethers";
+import { getTokenTransferApproval } from "./tokenApproval";
 
 export async function generateRoute(): Promise<SwapRoute | null> {
   const router = new AlphaRouter({
@@ -62,7 +60,10 @@ export async function executeRoute(
     throw new Error("Wallet address or provider not found");
   }
 
-  const tokenApproval = await getTokenTransferApproval(CurrentConfig.tokens.in);
+  const tokenApproval = await getTokenTransferApproval(
+    CurrentConfig.tokens.in,
+    V3_SWAP_ROUTER_ADDRESS
+  );
   if (tokenApproval !== TransactionState.Sent) {
     return TransactionState.Failed;
   }
@@ -79,38 +80,4 @@ export async function executeRoute(
   console.log("executeRoute", res);
 
   return res;
-}
-
-export async function getTokenTransferApproval(
-  token: Token
-): Promise<TransactionState> {
-  const walletAddress = getWalletAddress();
-  const provider = getProvider();
-  if (!walletAddress || !provider) {
-    throw new Error("Wallet address or provider not found");
-  }
-
-  try {
-    const tokenContract = new ethers.Contract(
-      token.address,
-      ERC20_ABI,
-      provider
-    );
-
-    const transaction = await tokenContract.populateTransaction.approve(
-      V3_SWAP_ROUTER_ADDRESS,
-      fromReadableAmount(
-        TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
-        token.decimals
-      ).toString()
-    );
-
-    return sendTransaction({
-      ...transaction,
-      from: walletAddress,
-    });
-  } catch (error) {
-    console.error("Error approving token transfer", error);
-    return TransactionState.Failed;
-  }
 }
