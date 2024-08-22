@@ -47,3 +47,7 @@ This example uses the first sample wallet offered by Foundry (listed in the term
 ### Start the web interface
 
 Run `yarn start` and navigate to [http://localhost:3000/](http://localhost:3000/)
+
+
+### More
+* Mint position failed with error: `Error: SFT`

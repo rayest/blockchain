@@ -32,3 +32,8 @@ npx hardhat ignition deploy ./ignition/modules/Lock.js
 3. register the consumer with the subscription: to get request id
 4. call requestRandomWords with false: to get request id and pay with LINK
 5. call getRequestStatus with request id: to get the random number list
+
+## chainlink functions
+1. Code contract and deploy `GettingStartedFunctionsConsumer.sol`
+2. Create Functions Subscription With Sepolia Token and get subscription id
+3. Add consumer to subscription. And the address of the consumer is the address of the contract deployed in step 1
