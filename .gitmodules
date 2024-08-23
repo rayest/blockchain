@@ -61,3 +61,6 @@
 [submodule "defi/uniswap/v3-sdk/lib/forge-std"]
 	path = defi/uniswap/v3-sdk/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "sc-programmer/lib/forge-std"]
+	path = sc-programmer/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
