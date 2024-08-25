@@ -65,6 +65,9 @@ $ anvil --help
 $ cast --help
 ```
 
+### Debug
+* Run `forge debug --debug test/evm/EVMMemory.t.sol --sig test_m_load_default` to debug a test case.
+
 ### More to do
 - [ ] 更复杂的 storage 存储。嵌套 mapping、动态 mapping、mapping 的 vale 是数组等。
 - [ ] memory 存储。
