@@ -13,7 +13,6 @@ contract YulIntroTest is StdInvariant, Test {
         yulIntro = new YulIntro();
     }
 
-
     function invariant_() public {}
 
     function test_add() public view {

@@ -64,3 +64,6 @@
 [submodule "sc-programmer/lib/forge-std"]
 	path = sc-programmer/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "sc-programmer/lib/solmate"]
+	path = sc-programmer/lib/solmate
+	url = https://github.com/rari-capital/solmate
