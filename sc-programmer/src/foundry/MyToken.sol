@@ -5,7 +5,10 @@ import "solmate/tokens/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MyToken is ERC20("Rayest", "RAY", 18), Ownable {
-    constructor() Ownable(msg.sender) {}
+
+    constructor() Ownable(msg.sender) {
+        totalSupply = 100;
+    }
 
     event TransferFromTo(address indexed from, address indexed to, uint256 amount);
 

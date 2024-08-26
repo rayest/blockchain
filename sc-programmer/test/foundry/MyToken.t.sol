@@ -17,7 +17,9 @@ contract MyTokenTest is StdInvariant, Test {
 
     function test_() public {}
 
-    function invariant_() public {}
+    function invariant_total_supply() public view {
+        assertEq(myToken.totalSupply(), 100);
+    }
 
     function test_event_transfer() public {
         vm.expectEmit(true, true, false, true);
