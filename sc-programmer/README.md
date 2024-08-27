@@ -129,5 +129,7 @@ $ cast --help
 - [ ] Run `forge script script/DeployBox.s.sol --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`
 * Greeter 合约升级。参考 openzeppelin-contracts-upgradeable test 示例
 - [ ] Run `forge test --match-contract GreeterUpgrade`
-- [ ] Add `/// @custom:oz-upgrades-from Greeter` to `GreeterV2.sol` and `/// @custom:oz-upgrades-unsafe-allow constructor` if used constructor. 
-`
+- [ ] Add `/// @custom:oz-upgrades-from Greeter` to `GreeterV2.sol` and `/// @custom:oz-upgrades-unsafe-allow constructor` if used constructor. `
+
+#### Echidna Test
+- [ ] install、run、test

@@ -21,4 +21,10 @@ contract CounterTest is Test {
         counter.setNumber(x);
         assertEq(counter.number(), x);
     }
+
+    // test with echidna
+    function echidna_test_increment() public returns (bool) {
+        counter.increment();
+        return counter.number() == 1;
+    }
 }
