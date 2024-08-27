@@ -67,3 +67,15 @@
 [submodule "sc-programmer/lib/solmate"]
 	path = sc-programmer/lib/solmate
 	url = https://github.com/rari-capital/solmate
+[submodule "sc-programmer/lib/openzeppelin-foundry-upgrades"]
+	path = sc-programmer/lib/openzeppelin-foundry-upgrades
+	url = https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades
+[submodule "sc-programmer/lib/openzeppelin-contracts"]
+	path = sc-programmer/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "sc-programmer/lib/openzeppelin-contracts-upgradeable"]
+	path = sc-programmer/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "sc-programmer/lib/foundry-devops"]
+	path = sc-programmer/lib/foundry-devops
+	url = https://github.com/Cyfrin/foundry-devops

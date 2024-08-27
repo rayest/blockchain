@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "solmate/tokens/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract MyToken is ERC20("Rayest", "RAY", 18), Ownable {
 

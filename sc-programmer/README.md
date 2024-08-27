@@ -1,5 +1,4 @@
 ### Foundry
-
 Foundry consists of:
 
 - **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
@@ -114,3 +113,16 @@ $ cast --help
 - [ ] `cast wallet list`
 - [ ] `cast wallet new`
 - [ ] `cast sig "foo()"`
+
+#### 依赖管理
+* foundry: forge install 
+- [ ] Run `export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890`. 根据具体的代理地址进行设置。
+* hardhat: npm install
+* openzeppelin
+  * Run `forge install openzeppelin/openzeppelin-contracts --no-commit`
+  * Run `forge install OpenZeppelin/openzeppelin-foundry-upgrades --no-commit`
+  * Run `forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit`
+
+#### 合约升级
+- [ ] Run `forge test --match-contract BoxTest --match-test test_upgrade -vvv --ffi`
+- [ ] Run `forge script script/DeployBox.s.sol --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`
