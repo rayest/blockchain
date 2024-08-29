@@ -21,3 +21,7 @@ npx hardhat ignition deploy ./ignition/modules/Lock.js
 
 #### ether.js
 - [ ] Run `npm install --save-dev @nomicfoundation/hardhat-ethers ethers`
+
+#### More to do
+- [ ] Test more about `multiSigWallet`
+- [ ] Create a React App about `multiSigWallet` using `web3.js` or `ethers.js`
