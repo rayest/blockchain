@@ -79,3 +79,9 @@
 [submodule "sc-programmer/lib/foundry-devops"]
 	path = sc-programmer/lib/foundry-devops
 	url = https://github.com/Cyfrin/foundry-devops
+[submodule "eat-the-block/foundry-based/lib/forge-std"]
+	path = eat-the-block/foundry-based/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "eat-the-block/foundry-based/lib/openzeppelin-contracts"]
+	path = eat-the-block/foundry-based/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts

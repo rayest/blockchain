@@ -133,3 +133,6 @@ $ cast --help
 
 #### Echidna Test
 - [ ] install、run、test
+
+#### DAI
+- [ ] Need some tests for contract of `RayDAIApp.sol`
