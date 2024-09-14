@@ -1,17 +1,3 @@
-### Foundry
-Foundry consists of:
-
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-#### Documentation
-
-https://book.getfoundry.sh/
-
-#### Usage
-
 ##### Build
 
 Run `forge build`
@@ -41,15 +27,8 @@ Run `anvil`
 Run `forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>`
 
 ##### Cast
+
 Run `cast <subcommand>`
-
-##### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
 
 ##### Debug
 
@@ -115,24 +94,54 @@ $ cast --help
 - [ ] `cast sig "foo()"`
 
 #### 依赖管理
-* foundry: forge install 
-- [ ] Run `export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890`. 根据具体的代理地址进行设置。
-* hardhat: npm install
-* openzeppelin
-  * Run `forge install openzeppelin/openzeppelin-contracts --no-commit`
-  * Run `forge install OpenZeppelin/openzeppelin-foundry-upgrades --no-commit`
-  * Run `forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit`
+
+- foundry: forge install
+
+* [ ] Run `export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890`. 根据具体的代理地址进行设置。
+
+- hardhat: npm install
+- openzeppelin
+  - Run `forge install openzeppelin/openzeppelin-contracts --no-commit`
+  - Run `forge install OpenZeppelin/openzeppelin-foundry-upgrades --no-commit`
+  - Run `forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit`
 
 #### 合约升级
-* Box 合约升级。似乎有点问题
-- [ ] Run `forge test --match-contract BoxTest --match-test test_upgrade -vvv --ffi`
-- [ ] Run `forge script script/DeployBox.s.sol --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`
-* Greeter 合约升级。参考 openzeppelin-contracts-upgradeable test 示例
-- [ ] Run `forge test --match-contract GreeterUpgrade`
-- [ ] Add `/// @custom:oz-upgrades-from Greeter` to `GreeterV2.sol` and `/// @custom:oz-upgrades-unsafe-allow constructor` if used constructor. `
+
+- Box 合约升级。似乎有点问题
+
+* [ ] Run `forge test --match-contract BoxTest --match-test test_upgrade -vvv --ffi`
+* [ ] Run `forge script script/DeployBox.s.sol --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`
+
+- Greeter 合约升级。参考 openzeppelin-contracts-upgradeable test 示例
+
+* [ ] Run `forge test --match-contract GreeterUpgrade`
+* [ ] Add `/// @custom:oz-upgrades-from Greeter` to `GreeterV2.sol` and `/// @custom:oz-upgrades-unsafe-allow constructor` if used constructor. `
 
 #### Echidna Test
+
 - [ ] install、run、test
 
 #### DAI
+
 - [ ] Need some tests for contract of `RayDAIApp.sol`
+
+#### Openzeppelin
+
+- [ ] `ERC20` token contract application like `DAI` and `USDT`
+- [ ] `ERC721` token contract application like `CryptoKitties`
+- [ ] `ERC1155` token contract application like `Axie Infinity`
+- [ ] `ICO` with `ERC20` token contract
+- [ ] `Crowdsale` with `ERC20` token contract
+- [ ] `Governance` with `ERC20` token contract.
+- [ ] `Staking` with `ERC20` token contract. `Stake` means that the token is locked in the contract and can't be transferred.
+- [ ] `Vesting` with `ERC20` token contract
+- [ ] `Flashloan` with `ERC20` token contract
+- [ ] `Lending` with `ERC20` token contract
+- [ ] `DEX` with `ERC20` token contract
+- [ ] `NFT` with `ERC721` token contract
+- [ ] `Pause` with `ERC20` token contract. Means that the contract can be paused. Like `Pausable` in Openzeppelin. When the contract is paused, the contract can't be called.
+- [ ] `Upgrade` with `ERC20` token contract. Means that the contract can be upgraded. Like `Upgradable` in Openzeppelin.
+- [ ] `Proxy` with `ERC20` token contract. Means that the contract can be proxied. Like `Proxy` in Openzeppelin.
+- [ ] `Governance` with `ERC20` token contract. Means that the contract can be governed. Like `Governance` in Openzeppelin.
+- [ ] To avoid `Overflow` using `SafeMath` in Openzeppelin.
+- [ ] To avoid `Reentrancy` using `ReentrancyGuard` in Openzeppelin.
